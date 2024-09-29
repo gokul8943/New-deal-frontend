@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <head className='bg-violet-300 shadow-md w-full'>
+        <div className='bg-violet-300 shadow-md w-full'>
             <div className='container mx-auto flex justify-between items-center py-4 px-6'>
                 <Link to='/'>
                     <h1 className='font-bold text-lg sm:text-xl flex items-center'>
@@ -10,7 +10,7 @@ const Navbar = () => {
                         <span className='text-slate-900'>dEAL</span>
                     </h1>
                 </Link>
-                <ul>
+                <ul className='hidden sm:flex gap-6'>
                     <li>
                         <Link to='/' className='text-slate-800 hover:underline font-medium'>
                             Home
@@ -19,6 +19,11 @@ const Navbar = () => {
                     <li>
                         <Link to='/listing' className='text-slate-800 hover:underline font-medium'>
                             Listing
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/about' className='text-slate-800 hover:underline font-medium'>
+                            About
                         </Link>
                     </li>
                     <li>
@@ -53,7 +58,6 @@ const Navbar = () => {
                         </svg>
                     </button>
                 </form>
-
                 <ul className='ml-6'>
                     <li>
                         <Link to='/login' className='text-slate-800 hover:underline font-semibold'>
@@ -62,7 +66,7 @@ const Navbar = () => {
                     </li>
                 </ul>
             </div>
-        </head>
+        </div>
     )
 }
 export default Navbar
