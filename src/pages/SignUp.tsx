@@ -10,7 +10,7 @@ const SignUp = () => {
                 <div className="flex-1">
                     <div className="flex flex-col gap-6">
                         <div className="mx-auto w-full max-w-sm">
-                            <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-violet-500'>
+                            <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-gray-800'>
                                 Sign in to your Account
                             </h1>
                             <form className="space-y-4 mt-6">

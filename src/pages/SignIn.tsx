@@ -10,7 +10,7 @@ const SignIn = () => {
                 <div className="flex-1">
                     <div className="flex flex-col gap-6">
                         <div className="mx-auto w-full max-w-sm">
-                            <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-violet-500'>
+                            <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-gray-800'>
                                 Login  Your account
                             </h1>
                             <form className="space-y-4 mt-6">
@@ -31,7 +31,7 @@ const SignIn = () => {
                                 </div>
                             </form>
                             <p className="text-center mt-4 text-gray-600 hover:text-black cursor-pointer">
-                                Don't have an account? Signup <span className="font-semibold">Login</span>
+                                Don't have an account?  <span className="font-semibold">Signup</span>
                             </p>
                             <div className="flex items-center justify-center mt-6 space-x-2">
                                 <hr className="w-1/3 border-gray-300" />
