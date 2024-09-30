@@ -1,11 +1,49 @@
-import React from 'react'
-import register from '../assets/images/register.png'
+import React, { useState } from 'react'
+import registerImage from '../assets/images/register.png'
+import { register } from '../service/api/user/user.api'
+import { toast } from 'sonner'
+import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: ""
+    })
+    const navigate = useNavigate()
+
+    const handleInputChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        // Clear validation error when input value changes
+      };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        try {
+            register(formData)
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success("Register Sucessfully",),
+                            navigate("/user/login");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    toast.error(error.response.data.message);
+                })
+        } catch (error) {
+            console.log(error);
+            toast.error("Internal server error")
+        }
+    }
     return (
-        <div className="bg-gradient-to-r from-violet-50 to-violet-500 min-h-screen flex items-center justify-center">
+        <div className="bg-gradient-to-r from-violet-50 to-violet-300 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
                 <div className="flex-1">
-                    <img src={register} alt="Register" className='rounded-xl w-full object-cover' />
+                    <img src={registerImage} alt="Register" className='rounded-xl w-full object-cover' />
                 </div>
                 <div className="flex-1">
                     <div className="flex flex-col gap-6">
@@ -13,23 +51,33 @@ const SignUp = () => {
                             <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-gray-800'>
                                 Sign in to your Account
                             </h1>
-                            <form className="space-y-4 mt-6">
+                            <form className="space-y-4 mt-6" onSubmit={handleSubmit}>
                                 <input
+                                onChange={handleInputChange}
                                     type="text"
                                     placeholder="Enter your name"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
+                                onChange={handleInputChange}
                                     type="email"
                                     placeholder="Enter your email"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
+                                onChange={handleInputChange}
+                                    type="text"
+                                    placeholder="Enter your Phone Number"
+                                    className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
+                                />
+                                <input
+                                onChange={handleInputChange}
                                     type="password"
                                     placeholder="Enter your password"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
+                                onChange={handleInputChange}
                                     type="password"
                                     placeholder="Confirm your password"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"

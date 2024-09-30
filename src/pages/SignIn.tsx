@@ -1,8 +1,10 @@
-import React from 'react'
 import login from '../assets/images/login.png'
+import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
+
+    const navigate = useNavigate()
     return (
-        <div className="bg-gradient-to-r from-violet-50 to-violet-500 min-h-screen flex items-center justify-center">
+        <div className="bg-gradient-to-r from-violet-50 to-violet-300 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
                 <div className="flex-1">
                     <img src={login} alt="Register" className='rounded-xl w-full object-cover' />
@@ -31,7 +33,7 @@ const SignIn = () => {
                                 </div>
                             </form>
                             <p className="text-center mt-4 text-gray-600 hover:text-black cursor-pointer">
-                                Don't have an account?  <span className="font-semibold">Signup</span>
+                                Don't have an account?  <a className="font-semibold" href='/user/register'>Signup</a>
                             </p>
                             <div className="flex items-center justify-center mt-6 space-x-2">
                                 <hr className="w-1/3 border-gray-300" />
