@@ -12,22 +12,22 @@ const Navbar = () => {
                 </Link>
                 <ul className='hidden sm:flex gap-6'>
                     <li>
-                        <Link to='/' className='text-slate-800 hover:underline font-medium'>
+                        <Link to='/' className='text-slate-800 hover:text-white font-medium'>
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link to='/listing' className='text-slate-800 hover:underline font-medium'>
+                        <Link to='/listing' className='text-slate-800 hover:text-white font-medium'>
                             Listing
                         </Link>
                     </li>
                     <li>
-                        <Link to='/about' className='text-slate-800 hover:underline font-medium'>
+                        <Link to='/about' className='text-slate-800 hover:text-white font-medium'>
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to='/blog' className='text-slate-800 hover:underline font-medium'>
+                        <Link to='/blog' className='text-slate-800 hover:text-white font-medium'>
                             Blog
                         </Link>
                     </li>
@@ -60,8 +60,8 @@ const Navbar = () => {
                 </form>
                 <ul className='ml-6'>
                     <li>
-                        <Link to='/login' className='text-slate-800 hover:underline font-semibold'>
-                            Sign-In
+                        <Link to='/login'>
+                           <button className='bg-white px-2 py-1 rounded-xl text-slate-800 hover:bg-yellow-200 hover:text-violet-600 font-semibold'>Login</button>
                         </Link>
                     </li>
                 </ul>
