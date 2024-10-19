@@ -37,9 +37,26 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="col-span-12">
-        <div className="">
+      <div className="col-span-12 w-full">
+        <div>
           <h1 className="font-bold text-[20px] text-slate-700 p-[20px]">Recently Added</h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[35px]">
+          {[...Array(4)].map((_, index) => (
+            <div key={index} className="col-span-1 shadow-md hover:shadow-2xl">
+              <ListingCard />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="col-span-12 h-[300px] m-[30px]">
+        <div className="w-full flex justify-center py-[30px]">
+          <h1 className="text-slate-700 text-[30px] w-1/2 font-bold text-center">
+          We are a global, boutique real estate brokerage
+          </h1>
+        </div>
+        <div className=" w-full">
+
         </div>
       </div>
 

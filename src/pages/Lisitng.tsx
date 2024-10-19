@@ -20,18 +20,11 @@ const Lisitng = () => {
           />
         </div>
       </div>
-      <div className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4">
+      {[...Array(10)].map((_, index) => (
+      <div key={index} className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4 m-2 shadow-md hover:shadow-2xl">
         <ListingCard />
       </div>
-      <div className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4">
-        <ListingCard />
-      </div>
-      <div className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4">
-        <ListingCard />
-      </div>
-      <div className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4">
-        <ListingCard />
-      </div>
+    ))}
     </main>
   )
 }
