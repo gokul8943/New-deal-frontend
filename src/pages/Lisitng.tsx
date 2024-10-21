@@ -3,7 +3,7 @@ import ListingCard from "../components/ListingCard"
 const Lisitng = () => {
   return (
     <main className='grid grid-cols-12  gap-2 w-full p-[30px]'>
-      <div className="h-[110px] col-span-12 w-full bg-gradient-to-r from-lime-50 to-indigo-50 rounded-lg p-[20px]">
+      <div className="h-[110px] col-span-12 w-full bg-gradient-to-r from-lime-100 to-indigo-100 rounded-lg p-[20px]">
         <div className="flex justify-center">
           <h1 className="text-slate-800 font-extrabold text-3xl">Search your dreams</h1>
         </div>
