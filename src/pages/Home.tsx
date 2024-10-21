@@ -3,7 +3,7 @@ import ListingCard from "../components/ListingCard"
 const Home = () => {
   return (
     <main className='grid grid-cols-12 w-full'>
-      <div className="col-span-12 h-[400px] bg-gradient-to-r from-indigo-300 to-lime-300 rounded m-[30px]">
+      <div className="col-span-12 h-[400px] bg-gradient-to-r from-indigo-200 to-lime-200 rounded m-[30px]">
         <div className="w-1/2">
           <div className="flex justify-center mt-[60px]">
             {/* <p className="text-cneter font-bold text-slate-800">Welcome to Realestate</p> */}

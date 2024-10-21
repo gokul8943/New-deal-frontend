@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <div className='bg-gradient-to-r from-indigo-200 to-violet-500  shadow-md w-full z-10'>
+        <div className='bg-gradient-to-r from-indigo-200 to-violet-400  shadow-md w-full z-10'>
             <div className='container mx-auto flex justify-between items-center py-4 px-6'>
                 <Link to='/'>
                     <h1 className='font-bold text-lg sm:text-xl flex items-center'>
@@ -32,7 +32,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                 </ul>
-                <form className='relative flex items-center'>
+                {/* <form className='relative flex items-center'>
                     <input
                         className='bg-slate-200 p-2 pl-4 pr-10 rounded-full focus:outline-none w-32 sm:w-56'
                         type='text'
@@ -57,11 +57,11 @@ const Navbar = () => {
                             />
                         </svg>
                     </button>
-                </form>
+                </form> */}
                 <ul className='ml-6'>
                     <li>
                         <Link to='/login'>
-                           <button className='bg-white px-2 py-1 rounded-xl text-slate-800 hover:bg-yellow-200 hover:text-violet-600 font-semibold'>Login</button>
+                           <button className='bg-gradient-to-r from-indigo-200 to-lime-500 px-2 py-1 rounded-xl text-slate-800  hover:text-violet-600 font-semibold'>Login</button>
                         </Link>
                     </li>
                 </ul>
