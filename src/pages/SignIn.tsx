@@ -4,7 +4,7 @@ const SignIn = () => {
 
     const navigate = useNavigate()
     return (
-        <div className="bg-gradient-to-r from-violet-50 to-violet-300 min-h-screen flex items-center justify-center">
+        <div className="bg-gradient-to-r from-white to-violet-100 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
                 <div className="flex-1">
                     <img src={login} alt="Register" className='rounded-xl w-full object-cover' />
