@@ -60,7 +60,7 @@ const Navbar = () => {
                 </form> */}
                 <ul className='ml-6'>
                     <li>
-                        <Link to='/login'>
+                        <Link to='/user/login'>
                            <button className='bg-gradient-to-r from-indigo-200 to-lime-500 px-2 py-1 rounded-xl text-slate-800  hover:text-violet-600 font-semibold'>Login</button>
                         </Link>
                     </li>

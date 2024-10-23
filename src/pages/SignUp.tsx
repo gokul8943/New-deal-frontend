@@ -89,7 +89,7 @@ const SignUp = () => {
                                 </div>
                             </form>
                             <p className="text-center mt-4 text-gray-600 hover:text-black cursor-pointer">
-                                Already have an account? <span className="font-semibold">Login</span>
+                                Already have an account? <a className="font-semibold" href='/user/login'>Login</a>
                             </p>
                             <div className="flex items-center justify-center mt-6 space-x-2">
                                 <hr className="w-1/3 border-gray-300" />

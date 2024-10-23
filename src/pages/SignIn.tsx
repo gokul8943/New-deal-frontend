@@ -1,8 +1,6 @@
 import login from '../assets/images/login.png'
-import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
 
-    const navigate = useNavigate()
     return (
         <div className="bg-gradient-to-r from-white to-violet-100 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
@@ -27,7 +25,7 @@ const SignIn = () => {
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <div className="flex justify-center">
-                                    <button className="bg-gradient-to-t from-blue-500 to-indigo-900 text-white text-lg font-medium rounded-full w-full p-3 transform transition duration-500 ease-in-out hover:shadow-lg hover:from-indigo-900 hover:to-blue-500 active:scale-95">
+                                    <button className="bg-gradient-to-t from-blue-400 to-indigo-600 text-white text-lg font-medium rounded-full w-full p-3 transform transition duration-500 ease-in-out hover:shadow-lg hover:from-indigo-900 hover:to-blue-500 active:scale-95">
                                         SignIn
                                     </button>
                                 </div>
