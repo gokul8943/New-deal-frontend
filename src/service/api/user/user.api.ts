@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../../../constants/instance'
 
 export const login = (data:any) =>{
     return axios.post("/user/login",data)

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import registerImage from '../assets/images/register.png'
 import { register } from '../service/api/user/user.api'
-import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { message } from 'antd'
 const SignUp = () => {
 
     const [formData, setFormData] = useState({
@@ -14,31 +14,36 @@ const SignUp = () => {
     })
     const navigate = useNavigate()
 
+
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
         // Clear validation error when input value changes
-      };
+    };
+    console.log('data', formData);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
             register(formData)
                 .then((response) => {
-                    if (response.status === 200) {
-                        toast.success("Register Sucessfully",),
+                    console.log('drres',response);
+                    
+                    if (response.status === 200 || response.status === 201) {
+                        message.success("Register Sucessfully",),
                             navigate("/user/login");
                     }
                 })
                 .catch((error) => {
                     console.log(error);
-                    toast.error(error.response.data.message);
+                    message.error(error.response.data.message);
                 })
         } catch (error) {
             console.log(error);
-            toast.error("Internal server error")
+            message.error("Internal server error")
         }
     }
+    
     return (
         <div className="bg-gradient-to-r from-white to-violet-100 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
@@ -53,31 +58,36 @@ const SignUp = () => {
                             </h1>
                             <form className="space-y-4 mt-6" onSubmit={handleSubmit}>
                                 <input
-                                onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    name='name'
                                     type="text"
                                     placeholder="Enter your name"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
-                                onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    name='email'
                                     type="email"
                                     placeholder="Enter your email"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
-                                onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    name='phone'
                                     type="text"
                                     placeholder="Enter your Phone Number"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
-                                onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    name='password'
                                     type="password"
                                     placeholder="Enter your password"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
-                                onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    name='confirmPassword'
                                     type="password"
                                     placeholder="Confirm your password"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
