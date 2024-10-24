@@ -1,11 +1,43 @@
-import login from '../assets/images/login.png'
+import { useState } from 'react'
+import logins from '../assets/images/login.png'
+import { login } from '../service/api/user/user.api'
+import { message } from 'antd'
+import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
+
+    const [loading, setLoading] = useState(false)
+    const [formData, setFormData] = useState({ email: "", password: "" })
+    const navigate = useNavigate()
+
+    const handleInputChange = (e: any) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        // Clear validation error when input value changes
+    };
+    console.log('data', formData);
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setLoading(true)
+        try {
+            login(formData)
+           .then((response)=>{
+            if(response.status === 200 || response.status === 201){
+                message.success("Login successfully"),
+                  navigate("/");
+            }
+           })
+        } catch (error) {
+            console.log(error);
+           
+        }
+    }
 
     return (
         <div className="bg-gradient-to-r from-white to-violet-100 min-h-screen flex items-center justify-center">
             <div className="flex p-6 max-w-5xl mx-auto flex-col md:flex-row md:items-center justify-between gap-10bg-gradient-to-r from-violet-50 to-violet-500 rounded-xl shadow-lg">
                 <div className="flex-1">
-                    <img src={login} alt="Register" className='rounded-xl w-full object-cover' />
+                    <img src={logins} alt="Register" className='rounded-xl w-full object-cover' />
                 </div>
                 <div className="flex-1">
                     <div className="flex flex-col gap-6">
@@ -13,14 +45,18 @@ const SignIn = () => {
                             <h1 className='text-center text-2xl font-bold leading-9 tracking-tight text-gray-800'>
                                 Login  Your account
                             </h1>
-                            <form className="space-y-4 mt-6">
+                            <form onSubmit={handleSubmit} className="space-y-4 mt-6">
                                 <input
                                     type="email"
+                                    name='email'
+                                    onChange={handleInputChange}
                                     placeholder="Enter your email"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
                                 <input
                                     type="password"
+                                    name='password'
+                                    onChange={handleInputChange}
                                     placeholder="Enter your password"
                                     className="w-full pl-4 p-2 border-2 shadow-md rounded-3xl outline-none hover:shadow-lg hover:border-violet-400"
                                 />
