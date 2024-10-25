@@ -1,5 +1,20 @@
+import React from "react";
 
-const ListingCard = () => {
+interface Listing {
+  id: string;
+  title: string;
+  price: number;
+  type:string
+  description: string;
+}
+
+interface ListingCardProps {
+  listing: Listing;
+}
+
+const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
+
+
   return (
     <>
       <div className="h-[400px] rounded-lg">
@@ -8,9 +23,9 @@ const ListingCard = () => {
         </div>
         <div className="border border-fuchsia-200 border-l-4 h-1/4 rounded-b-lg">
           <div className="m-[10px] ">
-            <h1 className="text-slate-800 text-lg font-bold">This is the new home</h1>
-            <h1 className="text-slate-800 text-base font-bold">1,80,000</h1>
-            <h1 className="text-slate-800 text-base font-bold">Kannur,Kerala</h1>
+            <h1 className="text-slate-800 text-lg font-bold">{listing.title}</h1>
+            <h1 className="text-slate-800 text-base font-bold">{listing.price.toLocaleString()}</h1>
+            <h1 className="text-slate-800 text-base font-bold">{listing.type}</h1>
           </div>
         </div>
       </div>
