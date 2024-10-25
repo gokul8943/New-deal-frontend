@@ -1,2 +1,5 @@
+import axios from '../../../constants/instance'
 
-export const 
+export const getListing = () =>{
+    return axios.get("/user/getLisitng")
+}
