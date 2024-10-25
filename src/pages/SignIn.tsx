@@ -5,20 +5,17 @@ import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 const SignIn = () => {
 
-    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({ email: "", password: "" })
     const navigate = useNavigate()
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        // Clear validation error when input value changes
     };
-    console.log('data', formData);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        setLoading(true)
+   
         try {
             login(formData)
            .then((response)=>{
@@ -26,10 +23,14 @@ const SignIn = () => {
                 message.success("Login successfully"),
                   navigate("/");
             }
+           }).catch((error)=>{
+                console.log(error)
+                message.error(error.response.data.message)
            })
         } catch (error) {
             console.log(error);
-           
+            console.log("Internal server error");
+            
         }
     }
 
