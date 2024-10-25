@@ -9,8 +9,6 @@ const Home = () => {
     getListing()
       .then((res) => {
         setData(res.data.response)
-        console.log('data', res);
-
       }).catch((error) => {
         console.log(error);
 
