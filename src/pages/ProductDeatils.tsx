@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react"
+import { getListing } from "../service/api/user/lisiting.api"
+import ListingCard from "../components/ListingCard"
 
 const ProductDeatils = () => {
+    const [data, setData] = useState<any[]>([])
 
+    useEffect(() => {
+      getListing()
+        .then((res) => {
+          setData(res.data.response)
+        }).catch((error) => {
+          console.log(error);
+  
+        })
+    }, [])
 
     return (
         <main className='grid grid-cols-12 w-full p-[20px]'>
@@ -50,6 +63,18 @@ const ProductDeatils = () => {
                     </div>
                 </div>
             </div>
+            <div className="col-span-12 w-full">
+        <div>
+          <h1 className="font-bold text-[20px] text-slate-700 p-[20px]">You might be interested in</h1>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[35px]">
+          {data.map((listing) => (
+            <div key={listing.id} className="col-span-1 shadow-md hover:shadow-2xl">
+              <ListingCard listing={listing} />
+            </div>
+          ))}
+        </div>
+      </div>
         </main>
     )
 }
