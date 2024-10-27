@@ -39,7 +39,7 @@ const ProductDeatils = () => {
                     </div>
                 </div>
             </div>
-            <div className="col-span-8 border border-black h-[300px] ">
+            <div className="col-span-8 border shadow-md h-[300px] ">
                 <div className="m-[10px]">
                     <div className="text-lg font-semibold text-slate-700">Description</div>
                     <p className="text-sm font-medium text-slate-500">FEDORS GROUP offers an exclusive FOR SALE elegant large 5-room apartment on Vincent Hložník Street in the Condominium Renaissance residential complex.</p>
