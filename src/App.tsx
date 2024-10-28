@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import ProductDeatils from "./pages/ProductDeatils"
 import ProfiePage from "./pages/ProfiePage"
+import ListingAddPage from "./pages/ListingAddPage"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/user/login' element={<SignIn/>} />
         <Route path='/user/register' element={<SignUp/>} />
         <Route path='/profile' element={<ProfiePage/>} />
+        <Route path='/AddProduct' element={<ListingAddPage/>} />
       </Routes>
     </BrowserRouter>
   )
