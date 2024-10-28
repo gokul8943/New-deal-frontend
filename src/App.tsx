@@ -6,6 +6,7 @@ import Lisitng from "./pages/Lisitng"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import ProductDeatils from "./pages/ProductDeatils"
+import ProfiePage from "./pages/ProfiePage"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/detailpage' element={<ProductDeatils/>} />
         <Route path='/user/login' element={<SignIn/>} />
         <Route path='/user/register' element={<SignUp/>} />
+        <Route path='/profile' element={<ProfiePage/>} />
       </Routes>
     </BrowserRouter>
   )
