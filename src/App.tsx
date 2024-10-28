@@ -12,17 +12,19 @@ import ListingAddPage from "./pages/ListingAddPage"
 function App() {
   return (
     <BrowserRouter>
-     <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About/>} />
-        <Route path='/listing' element={<Lisitng/>} />
-        <Route path='/detailpage' element={<ProductDeatils/>} />
-        <Route path='/user/login' element={<SignIn/>} />
-        <Route path='/user/register' element={<SignUp/>} />
-        <Route path='/profile' element={<ProfiePage/>} />
-        <Route path='/AddProduct' element={<ListingAddPage/>} />
-      </Routes>
+      <Navbar />
+      <div className="pt-[72px]">
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/listing' element={<Lisitng />} />
+          <Route path='/detailpage' element={<ProductDeatils />} />
+          <Route path='/user/login' element={<SignIn />} />
+          <Route path='/user/register' element={<SignUp />} />
+          <Route path='/profile' element={<ProfiePage />} />
+          <Route path='/AddProduct' element={<ListingAddPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }
