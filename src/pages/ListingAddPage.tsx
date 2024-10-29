@@ -16,40 +16,45 @@ interface FormValues {
     bedrooms: string;
     bathrooms: string;
     area: string;
-    image:any[]
+    image: any[]
 }
 
 const ListingAddPage: FC = () => {
     const [fileList, setFileList] = useState<any[]>([]);
-  
+
     const onFinish = (values: FormValues): void => {
-      console.log("Form Values:", { ...values, images: fileList });
+        console.log("Form Values:", { ...values, images: fileList });
     };
-  
+
     const handleFileChange = ({ fileList: newFileList }: any) => {
-      setFileList(newFileList);
+        setFileList(newFileList);
     };
     return (
         <main className="grid grid-cols-12 m-[20px] gap-2">
-            <div className="col-span-4 border h-[300px]">
-                <h1 className="text-lg font-semibold"></h1>
-                <Form.Item label="Upload" valuePropName="fileList" name="images">
-                    <Upload
-                        action="/upload.do"
-                        listType="picture-card"
-                        fileList={fileList}
-                        onChange={handleFileChange}
-                    >
-                        {fileList.length >= 8 ? null : (
-                            <button style={{ border: 0, background: 'none' }} type="button">
-                                <PlusOutlined />
-                                <div style={{ marginTop: 8 }}>Upload</div>
-                            </button>
-                        )}
-                    </Upload>
-                </Form.Item>
+            <div className="col-span-12 flex justify-center p-2">
+            <h1 className="text-2xl font-bold text-slate-700">Property Adding</h1>
             </div>
-            <div className="col-span-8 border p-4">
+            <div className="col-span-3 h-[300px]">
+                <h1 className="text-lg font-semibold p-[10px]">Upload Image</h1>
+                <div className="m-[10px]">
+                    <Form.Item label="" valuePropName="fileList" name="images">
+                        <Upload
+                            action="/upload.do"
+                            listType="picture-card"
+                            fileList={fileList}
+                            onChange={handleFileChange}
+                        >
+                            {fileList.length >= 8 ? null : (
+                                <button style={{ border: 0, background: 'none' }} type="button">
+                                    <PlusOutlined />
+                                    <div style={{ marginTop: 8 }}>Upload</div>
+                                </button>
+                            )}
+                        </Upload>
+                    </Form.Item>
+                </div>
+            </div>
+            <div className="col-span-9 p-[20px]">
                 <Form
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
