@@ -17,11 +17,11 @@ const ProfiePage = () => {
                 </div>
                 <div className="m-[10px] flex gap-2">
                     <h1 className="text-slate-600 font-semibold text-base">email:</h1>
-                    <h1 className="text-blue-500 font-semibold text-lg">test@gamail.com</h1>
+                    <h1 className="text-blue-500 font-semibold text-base">test@gamail.com</h1>
                 </div>
                 <div className="flex gap-2 ml-[10px]">
                 <h1 className="text-slate-600 font-semibold text-base">Phone:</h1>
-                <h1 className="text-blue-500 font-semibold text-lg">9207332015</h1>
+                <h1 className="text-blue-500 font-semibold text-base">9207332015</h1>
                 </div>
                 <div className="flex justify-end m-[10px]">
                     <Button>Edit Profile</Button>
