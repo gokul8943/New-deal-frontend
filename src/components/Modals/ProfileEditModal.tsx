@@ -22,7 +22,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isModalOpen, handle
         <Modal title="Edit Profile" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <div className="grid grid-cols-12 gap-2">
                 <div className="col-span-12 flex flex-col items-center">
-                    <div className="w-full flex justify-center mb-4">
+                    <div className="w-full flex justify-center mb-2">
                         <div className="relative">
                             <img
                                 src={image || 'default-profile.jpg'} // Replace with a default image path
@@ -39,7 +39,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isModalOpen, handle
                             />
                         </div>
                     </div>
-                    <div className="w-full">
+                    <div className="w-[85%]">
                         <Form layout="vertical">
                             <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please enter your name" }]}>
                                 <Input placeholder="Enter your name" />
