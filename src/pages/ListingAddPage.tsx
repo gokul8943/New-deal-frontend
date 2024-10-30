@@ -32,7 +32,7 @@ const ListingAddPage: FC = () => {
     return (
         <main className="grid grid-cols-12 m-[20px] gap-2">
             <div className="col-span-12 flex justify-center p-2">
-            <h1 className="text-2xl font-bold text-slate-700">Property Adding</h1>
+                <h1 className="text-2xl font-bold text-slate-700">Property Adding</h1>
             </div>
             <div className="col-span-3 h-[300px]">
                 <h1 className="text-lg font-semibold p-[10px]">Upload Image</h1>

@@ -45,7 +45,7 @@ const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isModalOpen, handle
                                 <Input placeholder="Enter your name" />
                             </Form.Item>
                             <Form.Item label="Email" name="email">
-                                <Input 
+                                <Input
                                     disabled
                                     className="cursor-not-allowed bg-gray-100" />
                             </Form.Item>

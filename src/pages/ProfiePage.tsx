@@ -5,13 +5,13 @@ import ProfileEditModal from "../components/Modals/ProfileEditModal";
 const ProfiePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
-      setIsModalOpen(true);
+        setIsModalOpen(true);
     };
     const handleOk = () => {
-      setIsModalOpen(false);
+        setIsModalOpen(false);
     };
     const handleCancel = () => {
-      setIsModalOpen(false);
+        setIsModalOpen(false);
     };
 
     return (
@@ -33,15 +33,15 @@ const ProfiePage = () => {
                     <h1 className="text-blue-500 font-semibold text-base">test@gamail.com</h1>
                 </div>
                 <div className="flex gap-2 ml-[10px]">
-                <h1 className="text-slate-600 font-semibold text-base">Phone:</h1>
-                <h1 className="text-blue-500 font-semibold text-base">9207332015</h1>
+                    <h1 className="text-slate-600 font-semibold text-base">Phone:</h1>
+                    <h1 className="text-blue-500 font-semibold text-base">9207332015</h1>
                 </div>
                 <div className="flex justify-end m-[10px]">
                     <Button onClick={showModal}>Edit Profile</Button>
-                    <ProfileEditModal 
-                    isModalOpen={isModalOpen}
-                    handleCancel={handleCancel}
-                    handleOk={handleOk}
+                    <ProfileEditModal
+                        isModalOpen={isModalOpen}
+                        handleCancel={handleCancel}
+                        handleOk={handleOk}
                     />
                 </div>
             </div>
