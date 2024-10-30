@@ -1,6 +1,19 @@
 import { Button } from "antd"
+import { useState } from "react"
+import ProfileEditModal from "../components/Modals/ProfileEditModal";
 
 const ProfiePage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+      setIsModalOpen(true);
+    };
+    const handleOk = () => {
+      setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+      setIsModalOpen(false);
+    };
+
     return (
         <main className="grid grid-cols-12 m-[20px] gap-2">
             <div className="col-span-3 border h-[300px] shadow-lg rounded-md bg-gradient-to-r from-indigo-200 to-violet-300">
@@ -24,7 +37,12 @@ const ProfiePage = () => {
                 <h1 className="text-blue-500 font-semibold text-base">9207332015</h1>
                 </div>
                 <div className="flex justify-end m-[10px]">
-                    <Button>Edit Profile</Button>
+                    <Button onClick={showModal}>Edit Profile</Button>
+                    <ProfileEditModal 
+                    isModalOpen={isModalOpen}
+                    handleCancel={handleCancel}
+                    handleOk={handleOk}
+                    />
                 </div>
             </div>
             <div className="col-span-9 border">
