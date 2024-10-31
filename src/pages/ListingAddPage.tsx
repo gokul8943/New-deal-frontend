@@ -64,7 +64,6 @@ const ListingAddPage: FC = () => {
                 >
                     {/* Split Form into Two Columns */}
                     <div className="grid grid-cols-2 gap-4">
-                        {/* Property Details Section */}
                         <div className="space-y-4">
                             <h2 className="text-lg font-semibold mb-2">Property Details</h2>
                             <Form.Item label="Title" name="title" rules={[{ required: true }]}>
