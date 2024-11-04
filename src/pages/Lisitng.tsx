@@ -8,7 +8,7 @@ const Lisitng = () => {
 
 useEffect(()=>{
    getListing()
-   .then((res)=>{
+   .then((res)=>{    
       setData(res.data.response)
    }).catch((error)=>{
     console.log(error);
