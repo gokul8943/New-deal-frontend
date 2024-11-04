@@ -1,7 +1,8 @@
-import { Form, Input, Radio, Button, Upload } from "antd";
+import { Form, Input, Radio, Button, Upload, message } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { FC, useState } from "react";
 import { PlusOutlined } from '@ant-design/icons';
+import { createListing } from "../service/api/user/lisiting.api";
 
 interface FormValues {
     title: string;
@@ -22,8 +23,14 @@ interface FormValues {
 const ListingAddPage: FC = () => {
     const [fileList, setFileList] = useState<any[]>([]);
 
-    const onFinish = (values: FormValues): void => {
-        console.log("Form Values:", { ...values, images: fileList });
+    const onFinish = async (values: FormValues) => {
+        try {
+            const result = await createListing({ ...values, image: fileList });
+            message.success("Property added successfully!");
+            console.log("API Response:", result);
+        } catch (error) {
+            message.error("Failed to add property. Please try again.");
+        }
     };
 
     const handleFileChange = ({ fileList: newFileList }: any) => {
@@ -37,12 +44,12 @@ const ListingAddPage: FC = () => {
             <div className="col-span-3 h-[300px]">
                 <h1 className="text-lg font-semibold p-[10px]">Upload Image</h1>
                 <div className="m-[10px]">
-                    <Form.Item label="" valuePropName="fileList" name="images">
+                <Form.Item label="" valuePropName="fileList" name="images">
                         <Upload
-                            action="/upload.do"
                             listType="picture-card"
                             fileList={fileList}
                             onChange={handleFileChange}
+                            beforeUpload={() => false} // Prevent automatic upload
                         >
                             {fileList.length >= 8 ? null : (
                                 <button style={{ border: 0, background: 'none' }} type="button">
@@ -74,9 +81,9 @@ const ListingAddPage: FC = () => {
                             </Form.Item>
                             <Form.Item label="Type" name="type" rules={[{ required: true }]}>
                                 <Radio.Group>
-                                    <Radio value="house">House</Radio>
-                                    <Radio value="apartment">Apartment</Radio>
-                                    <Radio value="land">Land</Radio>
+                                    <Radio value="House">House</Radio>
+                                    <Radio value="Apartment">Apartment</Radio>
+                                    <Radio value="Land">Land</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item label="Status" name="status" rules={[{ required: true }]}>
