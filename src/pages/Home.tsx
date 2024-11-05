@@ -2,18 +2,47 @@ import { useEffect, useState } from "react"
 import ListingCard from "../components/ListingCard"
 import { getListing } from "../service/api/user/lisiting.api"
 
+interface Image {
+  uid: string;
+  name: string;
+  size: number;
+  type: string;
+  thumbUrl: string;
+}
+
+interface Listing {
+  id: string;
+  createdAt:string;
+  title: string;
+  price: number;
+  type: string;
+  description: string;
+  image: Image[];
+}
 const Home = () => {
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<Listing[]>([]);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    getListing()
+    getListing(page, search)
       .then((res) => {
-        setData(res.data.response)
-      }).catch((error) => {
-        console.log(error);
-
+        const listings = Array.isArray(res.data.response.data) ? res.data.response.data : [];
+        setData(listings);
       })
-  }, [])
+      .catch((error) => {
+        console.error("Failed to fetch listings:", error);
+        setData([]);
+      });
+  }, [page, search]);
+
+  const handleSearch = (value: string) => {
+    setSearch(value);
+    setPage(1);  // Reset to first page when search changes
+  };
+  console.log(handleSearch);
+  
+
   return (
     <main className='grid grid-cols-12 w-full'>
       <div className="col-span-12 h-[400px] bg-gradient-to-r from-indigo-200 to-lime-200 rounded m-[30px]">

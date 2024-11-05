@@ -22,19 +22,40 @@ interface Listing {
 
 const Lisitng = () => {
   const [data, setData] = useState<Listing[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(0);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
-    getListing()
+    fetchData();
+  }, [page, search]);
+
+  const fetchData = () => {
+    getListing(page, search)
       .then((res) => {
-        const sortedData = res.data.response.sort(
+        const sortedData = res.data.response.data.sort(
           (a: Listing, b: Listing) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
         setData(sortedData);
+        setTotal(res.data.response.total);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setPage(1); // Reset to page 1 on new search
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 1) setPage(page - 1);
+  };
+
+  const handleNextPage = () => {
+    if (page < Math.ceil(total / 10)) setPage(page + 1);
+  };
 
   return (
     <main className='grid grid-cols-12  gap-2 w-full p-[30px]'>
@@ -48,10 +69,12 @@ const Lisitng = () => {
       </div>
       <div className="col-span-12 w-full  h-[130px] ">
         <div className="p-2  flex justify-center">
-          <input
-            className='p-2 w-[400px] rounded-full outline outline-black '
-            type='text'
-            placeholder='Search '
+        <input
+            className="p-2 w-[400px] rounded-full outline outline-black"
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={handleSearchChange}
           />
         </div>
       </div>
@@ -60,6 +83,22 @@ const Lisitng = () => {
         <ListingCard listing={listing}/>
       </div>
     ))}
+     <div className="col-span-12 flex justify-center gap-4 mt-4">
+        <button
+          onClick={handlePreviousPage}
+          disabled={page === 1}
+          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <button
+          onClick={handleNextPage}
+          disabled={page === Math.ceil(total / 10)}
+          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </main>
   )
 }
