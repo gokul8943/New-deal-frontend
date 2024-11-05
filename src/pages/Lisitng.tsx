@@ -2,19 +2,39 @@ import { useEffect, useState } from "react"
 import ListingCard from "../components/ListingCard"
 import { getListing } from "../service/api/user/lisiting.api"
 
+interface Image {
+  uid: string;
+  name: string;
+  size: number;
+  type: string;
+  thumbUrl: string;
+}
+
+interface Listing {
+  id: string;
+  createdAt:string;
+  title: string;
+  price: number;
+  type: string;
+  description: string;
+  image: Image[];
+}
 
 const Lisitng = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Listing[]>([]);
 
-useEffect(()=>{
-   getListing()
-   .then((res)=>{    
-      setData(res.data.response)
-   }).catch((error)=>{
-    console.log(error);
-    
-   })
-},[])
+  useEffect(() => {
+    getListing()
+      .then((res) => {
+        const sortedData = res.data.response.sort(
+          (a: Listing, b: Listing) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        setData(sortedData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <main className='grid grid-cols-12  gap-2 w-full p-[30px]'>
