@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ListingCard from "../components/ListingCard"
 import { getListing } from "../service/api/user/lisiting.api"
+import { Input } from "antd";
 
 interface Image {
   uid: string;
@@ -46,7 +47,7 @@ const Lisitng = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    setPage(1); // Reset to page 1 on new search
+    setPage(1); 
   };
 
   const handlePreviousPage = () => {
@@ -68,9 +69,9 @@ const Lisitng = () => {
         </div>
       </div>
       <div className="col-span-12 w-full  h-[130px] ">
-        <div className="p-2  flex justify-center">
-        <input
-            className="p-2 w-[400px] rounded-full outline outline-black"
+        <div className="p-2 flex justify-center">
+        <Input
+            className="p-2 w-[400px] rounded-full  "
             type="text"
             placeholder="Search"
             value={search}
