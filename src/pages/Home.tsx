@@ -21,27 +21,18 @@ interface Listing {
 }
 const Home = () => {
   const [data, setData] = useState<Listing[]>([]);
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    getListing(page, search)
+    getListing()
       .then((res) => {
         const listings = Array.isArray(res.data.response.data) ? res.data.response.data : [];
         setData(listings);
       })
       .catch((error) => {
         console.error("Failed to fetch listings:", error);
-        setData([]);
+        setData([]); // Fallback to empty array on error
       });
-  }, [page, search]);
-
-  const handleSearch = (value: string) => {
-    setSearch(value);
-    setPage(1);  // Reset to first page when search changes
-  };
-  console.log(handleSearch);
-  
+  }, []);
 
   return (
     <main className='grid grid-cols-12 w-full'>
