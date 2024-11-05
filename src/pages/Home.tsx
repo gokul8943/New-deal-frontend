@@ -55,7 +55,7 @@ const Home = () => {
           <h1 className="font-bold text-[20px] text-slate-700 p-[20px]">Recently Added</h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[35px]">
-          {data.map((listing) => (
+        {data.slice(-4).map((listing) => (
             <div key={listing.id} className="col-span-1 shadow-md hover:shadow-2xl">
               <ListingCard listing={listing} />
             </div>
