@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ListingCard from "../components/ListingCard"
 import { getListing } from "../service/api/user/lisiting.api"
-import { Input } from "antd";
+import { Input, Pagination } from "antd";
 
 interface Image {
   uid: string;
@@ -50,12 +50,8 @@ const Lisitng = () => {
     setPage(1); 
   };
 
-  const handlePreviousPage = () => {
-    if (page > 1) setPage(page - 1);
-  };
-
-  const handleNextPage = () => {
-    if (page < Math.ceil(total / 10)) setPage(page + 1);
+  const handlePageChange = (page: number) => {
+    setPage(page);
   };
 
   return (
@@ -87,24 +83,17 @@ const Lisitng = () => {
         ))
       ) : (
         <div className="col-span-12 flex justify-center mt-4">
-          <h2 className="text-slate-600 font-medium text-lg">No property found</h2>
+          <h2 className="text-slate-600 font-bold text-xl">No property found</h2>
         </div>
       )}
      <div className="col-span-12 flex justify-center gap-4 mt-4">
-        <button
-          onClick={handlePreviousPage}
-          disabled={page === 1}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-        >
-          Previous
-        </button>
-        <button
-          onClick={handleNextPage}
-          disabled={page === Math.ceil(total / 10)}
-          className="px-4 py-2 bg-gray-300 rounded-md disabled:opacity-50"
-        >
-          Next
-        </button>
+     <Pagination
+          current={page}
+          pageSize={10}
+          total={total}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
       </div>
     </main>
   )
