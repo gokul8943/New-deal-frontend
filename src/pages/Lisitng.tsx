@@ -79,11 +79,17 @@ const Lisitng = () => {
           />
         </div>
       </div>
-      {data.map((listing) => (
-      <div key={listing.id} className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4 m-2 shadow-md hover:shadow-2xl">
-        <ListingCard listing={listing}/>
-      </div>
-    ))}
+      {data.length > 0 ? (
+        data.map((listing) => (
+          <div key={listing.id} className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4 m-2 shadow-md hover:shadow-2xl">
+            <ListingCard listing={listing} />
+          </div>
+        ))
+      ) : (
+        <div className="col-span-12 flex justify-center mt-4">
+          <h2 className="text-slate-600 font-medium text-lg">No property found</h2>
+        </div>
+      )}
      <div className="col-span-12 flex justify-center gap-4 mt-4">
         <button
           onClick={handlePreviousPage}
