@@ -2,7 +2,7 @@
 const About = () => {
   return (
     <div className='grid grid-cols-12'>
-      <div className='col-span-12 py-20 px-10 max-w-6xl mx-auto border m-[20px] bg-gradient-to-r from-green-300 to-fuchsia-300 rounded-lg shadow-lg'>
+      <div className='col-span-12 py-20 px-10 max-w-6xl mx-auto border m-[20px] bg-gradient-to-r from-white to-violet-300 rounded-lg shadow-lg'>
         <h1 className="text-xl font-bold mb-4 text-green-500">Who Are We</h1>
         <h1 className="text-2xl font-bold mb-4 p-[20px] text-gray-500">We Help To Find Your Dream</h1>
         <h1 className='text-3xl font-bold mb-4 text-center text-violet-600'>  About    <span className='text-slate-600'>FIND</span>
