@@ -25,11 +25,15 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing }) => {
   return (
     <>
       <div className="h-[400px] rounded-lg">
-        <div className="h-3/4 border border-red-100 rounded-t-lg">
+        <div className="h-3/4 border border-red-100 rounded-t-lg w-full relative">
         {listing.image.length > 0 ? (
-          <img src={listing.image[0].thumbUrl} alt={listing.title} className="h-full w-full object-cover" />
+          <img 
+            src={listing.image[0].thumbUrl} 
+            alt={listing.title} 
+            className="absolute inset-0 h-full w-full object-cover rounded-t-lg" 
+          />
         ) : (
-          <div className="h-full flex items-center justify-center bg-gray-200"> {/* Placeholder for no image */}
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-t-lg">
             <span>No Image Available</span>
           </div>
         )}
