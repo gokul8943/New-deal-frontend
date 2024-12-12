@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ListingCard from "../components/ListingCard"
 import { getListing } from "../service/api/user/lisiting.api"
-import { Input, Pagination } from "antd";
+import { Input, Pagination, Select, Radio, Space } from "antd";
 
 interface Image {
   uid: string;
@@ -21,22 +21,56 @@ interface Listing {
   image: Image[];
 }
 
+// Add new type for sorting
+type SortOption = 'newest' | 'oldest' | 'price-high' | 'price-low';
+
 const Lisitng = () => {
   const [data, setData] = useState<Listing[]>([]);
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
+  const [sortBy, setSortBy] = useState<SortOption>('newest');
+  const [propertyType, setPropertyType] = useState<string>('all');
+  const [priceRange, setPriceRange] = useState<string>('all');
 
   useEffect(() => {
     fetchData();
-  }, [page, search]);
+  }, [page, search, sortBy, propertyType, priceRange]);
 
   const fetchData = () => {
     getListing(page, search)
       .then((res) => {
-        const sortedData = res.data.response.data.sort(
-          (a: Listing, b: Listing) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
+        let sortedData = res.data.response.data;
+        
+        // Apply sorting
+        switch (sortBy) {
+          case 'newest':
+            sortedData.sort((a: Listing, b: Listing) => 
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+            break;
+          case 'oldest':
+            sortedData.sort((a: Listing, b: Listing) => 
+              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+            break;
+          case 'price-high':
+            sortedData.sort((a: Listing, b: Listing) => b.price - a.price);
+            break;
+          case 'price-low':
+            sortedData.sort((a: Listing, b: Listing) => a.price - b.price);
+            break;
+        }
+
+        // Apply filters
+        if (propertyType !== 'all') {
+          sortedData = sortedData.filter((item: Listing) => item.type === propertyType);
+        }
+
+        if (priceRange !== 'all') {
+          const [min, max] = priceRange.split('-').map(Number);
+          sortedData = sortedData.filter((item: Listing) => 
+            item.price >= min && (max ? item.price <= max : true));
+        }
+
         setData(sortedData);
         setTotal(res.data.response.total);
       })
@@ -55,7 +89,7 @@ const Lisitng = () => {
   };
 
   return (
-    <main className='grid grid-cols-12  gap-2 w-full p-[30px]'>
+    <main className='grid grid-cols-12 gap-2 w-full p-[30px]'>
       <div className="h-[110px] col-span-12 w-full bg-gradient-to-r from-lime-100 to-indigo-100 rounded-lg p-[20px]">
         <div className="flex justify-center">
           <h1 className="text-slate-800 font-extrabold text-3xl">Search your dreams</h1>
@@ -64,17 +98,69 @@ const Lisitng = () => {
           <h1 className="text-slate-700 font-medium text-md">Choose from the most advanteogous offers</h1>
         </div>
       </div>
-      <div className="col-span-12 w-full  h-[130px] ">
-        <div className="p-2 flex justify-center">
-        <Input
-            className="p-2 w-[400px] rounded-full  "
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={handleSearchChange}
-          />
+      
+      <div className="col-span-12 w-full h-auto">
+        <div className="p-2 flex flex-col gap-4">
+          {/* Search Input */}
+          <div className="flex justify-center">
+            <Input
+              className="p-2 w-[400px] rounded-full"
+              type="text"
+              placeholder="Search"
+              value={search}
+              onChange={handleSearchChange}
+            />
+          </div>
+
+          {/* Filters Section */}
+          <div className="flex justify-center gap-4 flex-wrap">
+            {/* Sort Dropdown */}
+            <Select
+              className="min-w-[200px]"
+              placeholder="Sort by"
+              value={sortBy}
+              onChange={(value: SortOption) => setSortBy(value)}
+              options={[
+                { value: 'newest', label: 'Newest First' },
+                { value: 'oldest', label: 'Oldest First' },
+                { value: 'price-high', label: 'Price: High to Low' },
+                { value: 'price-low', label: 'Price: Low to High' },
+              ]}
+            />
+
+            {/* Property Type Filter */}
+            <Radio.Group 
+              value={propertyType} 
+              onChange={(e) => setPropertyType(e.target.value)}
+              className="flex-wrap"
+            >
+              <Space wrap>
+                <Radio.Button value="all">All</Radio.Button>
+                <Radio.Button value="house">House</Radio.Button>
+                <Radio.Button value="apartment">Apartment</Radio.Button>
+                <Radio.Button value="villa">Villa</Radio.Button>
+              </Space>
+            </Radio.Group>
+
+            {/* Price Range Filter */}
+            <Select
+              className="min-w-[200px]"
+              placeholder="Price Range"
+              value={priceRange}
+              onChange={(value) => setPriceRange(value)}
+              options={[
+                { value: 'all', label: 'All Prices' },
+                { value: '0-100000', label: '$0 - $100,000' },
+                { value: '100000-300000', label: '$100,000 - $300,000' },
+                { value: '300000-500000', label: '$300,000 - $500,000' },
+                { value: '500000-1000000', label: '$500,000 - $1,000,000' },
+                { value: '1000000-', label: 'Over $1,000,000' },
+              ]}
+            />
+          </div>
         </div>
       </div>
+
       {data.length > 0 ? (
         data.map((listing) => (
           <div key={listing.id} className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4 m-2 shadow-md hover:shadow-2xl">
