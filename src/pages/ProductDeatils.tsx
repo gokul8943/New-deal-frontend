@@ -1,82 +1,135 @@
 import { useEffect, useState } from "react"
-import { getListing } from "../service/api/user/lisiting.api"
+import { getOneListing } from "../service/api/user/lisiting.api"
 import ListingCard from "../components/ListingCard"
+import { MapPin, Expand, Bath, Bed, ArrowRight } from "lucide-react"
 
-const ProductDeatils = () => {
+const ProductDetails = () => {
     const [data, setData] = useState<any[]>([])
+    const [mainImage, setMainImage] = useState<string>("/api/placeholder/800/500")
 
     useEffect(() => {
-      getListing()
+      getOneListing()
         .then((res) => {
+            console.log('data',res);
+            
           setData(res.data.response)
         }).catch((error) => {
           console.log(error);
-  
         })
     }, [])
 
-    return (
-        <main className='grid grid-cols-12 w-full p-[20px]'>
-            <div className="col-span-12 flex justify-between gap-[6px]">
-                <div className="w-2/3">
-                    <div className="flex justify-start p-[20px]">
-                        <h1 className="font-bold text-slate-600 text-2xl">Beautiful House</h1>
-                    </div>
-                    <div className="h-[350px] border">
+    const propertyDetails = [
+        { icon: <MapPin className="text-blue-500 w-5 h-5" />, label: "City", value: "Kannur" },
+        { icon: <Expand className="text-green-500 w-5 h-5" />, label: "Total Area", value: "1500 sqft" },
+        { icon: <Bed className="text-purple-500 w-5 h-5" />, label: "Rooms", value: "3 Rooms" },
+        { icon: <Bath className="text-teal-500 w-5 h-5" />, label: "Bathrooms", value: "3" }
+    ]
 
+    const additionalImages = [
+        "/api/placeholder/200/150",
+        "/api/placeholder/200/150",
+        "/api/placeholder/200/150",
+        "/api/placeholder/200/150"
+    ]
+
+    return (
+        <main className="bg-gray-50 min-h-screen p-6 md:p-10">
+            <div className="max-w-7xl mx-auto">
+                {/* Property Header */}
+                <div className="flex flex-col md:flex-row gap-6 mb-8">
+                    <div className="md:w-2/3 bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div className="p-6 bg-gray-100">
+                            <h1 className="text-3xl font-bold text-gray-800">Beautiful Modern House</h1>
+                            <div className="flex items-center text-gray-600 mt-2">
+                                <MapPin className="w-5 h-5 mr-2" />
+                                <span>Kottiyoor, Kannur</span>
+                            </div>
+                        </div>
+                        
+                        {/* Main Image with Thumbnails */}
+                        <div className="relative">
+                            <img 
+                                src={mainImage} 
+                                alt="Property Main View" 
+                                className="w-full h-[450px] object-cover"
+                            />
+                            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                                {additionalImages.map((img, index) => (
+                                    <img 
+                                        key={index}
+                                        src={img} 
+                                        alt={`Thumbnail ${index + 1}`}
+                                        className="w-16 h-16 object-cover rounded-md cursor-pointer opacity-70 hover:opacity-100"
+                                        onClick={() => setMainImage(img)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Property Characteristics */}
+                    <div className="md:w-1/3 bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6">Property Details</h2>
+                        <div className="space-y-4">
+                            {propertyDetails.map((detail, index) => (
+                                <div 
+                                    key={index} 
+                                    className="flex items-center justify-between border-b pb-3 last:border-b-0"
+                                >
+                                    <div className="flex items-center space-x-3">
+                                        {detail.icon}
+                                        <span className="font-semibold text-gray-700">{detail.label}</span>
+                                    </div>
+                                    <span className="text-gray-600">{detail.value}</span>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="w-full mt-6 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center">
+                            Contact Agent <ArrowRight className="ml-2 w-5 h-5" />
+                        </button>
                     </div>
                 </div>
-                <div className="w-1/3  h-[400px]">
-                    <div className="flex justify-start pl-[10px] mt-2">
-                        <h1 className="font-bold text-slate-600 text-xl">Brief characteristics</h1>
+
+                {/* Description and Address */}
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    <div className="md:col-span-2 bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4">Description</h2>
+                        <p className="text-gray-600 leading-relaxed">
+                            FEDORS GROUP offers an exclusive FOR SALE elegant large 5-room apartment on Vincent Hložník Street in the Condominium Renaissance residential complex. 
+                            This beautiful property combines modern design with comfort, featuring spacious rooms, high-quality finishes, and a prime location.
+                        </p>
                     </div>
-                    <div className="ml-[20px]">
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">City</span>:<span>Kannur</span>
+                    <div className="bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-4">Location</h2>
+                        <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
+                            <p className="text-gray-500">Map Placeholder</p>
                         </div>
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">Street</span>:<span>Kottiyoor</span>
+                        <div className="mt-4">
+                            <div className="flex items-center text-gray-600">
+                                <MapPin className="w-5 h-5 mr-2" />
+                                <span>Kottiyoor, Kannur</span>
+                            </div>
                         </div>
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">Type</span>:<span>House</span>
-                        </div>
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">Number of rooms</span>:<span>3 Rooms</span>
-                        </div>
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">Total area</span>:<span>1500sqft</span>
-                        </div>
-                        <div className="flex gap-2 m-2">
-                            <span className="text-base font-bold text-slate-700">No of bathrooms</span>:<span>3</span>
-                        </div>
+                    </div>
+                </div>
+
+                {/* Similar Listings */}
+                <div className="bg-white rounded-xl shadow-lg p-6">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">You Might Also Like</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {data.map((listing) => (
+                            <div 
+                                key={listing.id} 
+                                className="transform transition duration-300 hover:scale-105"
+                            >
+                                <ListingCard listing={listing} />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-            <div className="col-span-8 border shadow-md h-[300px] ">
-                <div className="m-[10px]">
-                    <div className="text-lg font-semibold text-slate-700">Description</div>
-                    <p className="text-sm font-medium text-slate-500">FEDORS GROUP offers an exclusive FOR SALE elegant large 5-room apartment on Vincent Hložník Street in the Condominium Renaissance residential complex.</p>
-                </div>
-                <div className="h-[100px] w-1/2 shadow-lg ml-2 rounded-md">
-                    <div className="m-[20px]">
-                     <h1 className="text-lg font-semibold text-slate-700">Address</h1>
-                    </div>
-                </div>
-            </div>
-            <div className="col-span-12 w-full">
-        <div>
-          <h1 className="font-bold text-[20px] text-slate-700 p-[20px]">You might be interested in</h1>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[35px]">
-          {data.map((listing) => (
-            <div key={listing.id} className="col-span-1 shadow-md hover:shadow-2xl">
-              <ListingCard listing={listing} />
-            </div>
-          ))}
-        </div>
-      </div>
         </main>
     )
 }
 
-export default ProductDeatils
+export default ProductDetails

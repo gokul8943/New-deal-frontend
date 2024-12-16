@@ -40,6 +40,8 @@ const Lisitng = () => {
   const fetchData = () => {
     getListing(page, search)
       .then((res) => {
+        console.log('data',res);
+        
         let sortedData = res.data.response.data;
         
         // Apply sorting
