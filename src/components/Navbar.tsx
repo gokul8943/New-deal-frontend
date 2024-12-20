@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <div className='bg-gradient-to-r from-indigo-200 to-violet-300  shadow-md w-full fixed z-10 py-5 px-4'>
+        <div className='bg-gradient-to-r from-indigo-200 to-violet-300  shadow-md w-full fixed z-20 py-5 px-4'>
             <div className='container mx-auto flex justify-between items-center'>
                 <Link to='/'>
                     <h1 className='font-bold text-lg sm:text-xl flex items-center'>

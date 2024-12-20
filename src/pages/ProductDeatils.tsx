@@ -2,16 +2,17 @@ import { useEffect, useState } from "react"
 import { getOneListing } from "../service/api/user/lisiting.api"
 import ListingCard from "../components/ListingCard"
 import { MapPin, Expand, Bath, Bed, ArrowRight } from "lucide-react"
+import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
+    const { lid } = useParams<{ lid: string }>()
     const [data, setData] = useState<any[]>([])
     const [mainImage, setMainImage] = useState<string>("/api/placeholder/800/500")
 
     useEffect(() => {
-      getOneListing()
+      getOneListing(lid)
         .then((res) => {
             console.log('data',res);
-            
           setData(res.data.response)
         }).catch((error) => {
           console.log(error);
