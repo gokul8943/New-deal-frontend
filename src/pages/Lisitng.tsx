@@ -161,7 +161,7 @@ const Listing = () => {
                 <Radio.Button value="all">All</Radio.Button>
                 <Radio.Button value="house">House</Radio.Button>
                 <Radio.Button value="apartment">Apartment</Radio.Button>
-                <Radio.Button value="villa">Villa</Radio.Button>
+                <Radio.Button value="home">Villa</Radio.Button>
               </Space>
             </Radio.Group>
 

@@ -1,38 +1,83 @@
+import { motion } from 'framer-motion';
 import home from '../assets/images/newhome1.jpg'
-
 
 const About = () => {
   return (
-    <div className='grid grid-cols-12'>
-      <div className='col-span-12 py-20 px-10 max-w-6xl mx-auto border m-[20px] bg-gradient-to-r from-white to-violet-300 rounded-lg shadow-lg'>
-        <div className="flex">
-          <div className="flex-1">
-          <div className="float-right ml-6 mb-4">
-              <img 
-                src={home} // Replace with your actual image path
-                alt="About FINDdEAL"
-                className="w-[500px] h-[400px] rounded-lg shadow-lg hover:shadow-2xl object-cover"
-              />
-            </div>
-            <h1 className="text-xl font-bold mb-4 text-green-500">Who Are We</h1>
-            <h1 className="text-2xl font-bold mb-4 p-[20px] text-gray-500">We Help To Find Your Dream</h1>
-            <h1 className='text-3xl font-bold mb-4 text-center text-violet-600'>  About    <span className='text-slate-600'>FIND</span>
-              <span className='text-slate-900'>dEAL</span>
-            </h1>
-            
-            {/* Image floating on the right */}
-        
+    <div className="min-h-screen bg-gradient-to-b from-violet-50 to-white py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+        >
+          <div className="grid md:grid-cols-2 gap-8 p-8">
+            {/* Left Column - Text Content */}
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <span className="text-sm font-semibold text-violet-600 tracking-wider uppercase">
+                  Who We Are
+                </span>
+                <h2 className="text-3xl font-bold text-gray-900">
+                  We Help To Find Your Dream Home
+                </h2>
+                <div className="flex items-center  py-4">
+                  <span className="text-4xl font-bold text-violet-600">FIND</span>
+                  <span className="text-4xl font-bold text-slate-600">dEAL</span>
+                </div>
+              </div>
+              
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  FINDdEAL is a premier real estate agency specializing in helping clients 
+                  navigate their property journey in the most desirable neighborhoods. Our 
+                  team of dedicated experts brings years of experience and local market 
+                  insights to every client interaction.
+                </p>
+                <p>
+                  Our mission is simple: transform your real estate dreams into reality. 
+                  Whether you're buying your first home, selling a property, or looking 
+                  for the perfect rental, we provide personalized solutions tailored to 
+                  your unique needs.
+                </p>
+                <p>
+                  We believe in creating lasting relationships built on trust, transparency, 
+                  and exceptional results. Our commitment to excellence has made us a 
+                  trusted name in real estate, serving countless satisfied clients throughout 
+                  their property journey.
+                </p>
+              </div>
 
-            <p className='mb-4 text-slate-700'>FINDdEAL is a leading real estate agency that specializes in helping clients buy, sell, and rent properties in the most desirable neighborhoods. Our team of experienced agents is dedicated to providing exceptional service and making the buying and selling process as smooth as possible.</p>
-            <p className='mb-4 text-slate-700'>
-              Our mission is to help our clients achieve their real estate goals by providing expert advice, personalized service, and a deep understanding of the local market. Whether you are looking to buy, sell, or rent a property, we are here to help you every step of the way.
-            </p>
-            <p className='mb-4 text-slate-700'>We are committed to providing the highest level of service to our clients. We believe that buying or selling a property should be an exciting and rewarding experience, and we are dedicated to making that a reality for each and every one of our clients.</p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <div className="bg-violet-50 p-4 rounded-lg flex-1 min-w-[200px]">
+                  <h3 className="text-2xl font-bold text-violet-600">500+</h3>
+                  <p className="text-gray-600">Properties Sold</p>
+                </div>
+                <div className="bg-violet-50 p-4 rounded-lg flex-1 min-w-[200px]">
+                  <h3 className="text-2xl font-bold text-violet-600">98%</h3>
+                  <p className="text-gray-600">Client Satisfaction</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Image */}
+            <div className="relative">
+              <img 
+                src={home}
+                alt="Luxury Home Exterior"
+                className="w-full h-full object-cover rounded-xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300"
+              />
+              <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-4 rounded-lg">
+                <p className="text-sm text-gray-600 font-medium">
+                  "Your dream home is just a conversation away. Let's make it happen together."
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
