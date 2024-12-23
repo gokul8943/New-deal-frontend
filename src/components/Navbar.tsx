@@ -12,22 +12,22 @@ const Navbar = () => {
                 </Link>
                 <ul className='hidden sm:flex gap-6'>
                     <li>
-                        <Link to='/' className='text-slate-800 hover:text-white font-medium'>
+                        <Link to='/' className='text-slate-800 hover:text-white font-bold drop-shadow-xl '>
                             Home
                         </Link>
                     </li>
                     <li>
-                        <Link to='/listing' className='text-slate-800 hover:text-white font-medium'>
+                        <Link to='/listing' className='text-slate-800 hover:text-white font-bold drop-shadow-xl'>
                             Listing
                         </Link>
                     </li>
                     <li>
-                        <Link to='/about' className='text-slate-800 hover:text-white font-medium'>
+                        <Link to='/about' className='text-slate-800 hover:text-white font-bold drop-shadow-xl'>
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to='/blog' className='text-slate-800 hover:text-white font-medium'>
+                        <Link to='/blog' className='text-slate-800 hover:text-white font-bold drop-shadow-xl'>
                             Blog
                         </Link>
                     </li>
