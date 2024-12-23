@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import ListingCard from "../components/ListingCard";
 import { getListing } from "../service/api/user/lisiting.api";
-import { Input, Pagination, Select, Radio, Space } from "antd";
+import { Input, Pagination, Select, Radio, Space, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface Image {
   uid: string;
@@ -33,6 +34,7 @@ const Listing = () => {
   const [propertyType, setPropertyType] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<string>("all");
 
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchData();
@@ -97,9 +99,14 @@ const Listing = () => {
     setPage(page);
   };
 
-  const handleListingClick = (lid:string) => {
+  const handleListingClick = (lid: string) => {
     window.open(`/detailpage/${lid}`, '_blank');
   };
+
+  const handleAddPropertyClick = () => {
+    navigate('/AddProduct');
+  };
+
 
   return (
     <main className="grid grid-cols-12 gap-2 w-full p-[30px]">
@@ -121,7 +128,7 @@ const Listing = () => {
       <div className="col-span-12 w-full h-auto">
         <div className="p-2 flex flex-col gap-4">
           {/* Search Input */}
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-20">
             <Input
               className="p-2 w-[400px] rounded-full"
               type="text"
@@ -130,7 +137,6 @@ const Listing = () => {
               onChange={handleSearchChange}
             />
           </div>
-
           {/* Sort and Filters */}
           <div className="flex justify-center gap-4 flex-wrap">
             <Select
@@ -174,6 +180,9 @@ const Listing = () => {
               ]}
             />
           </div>
+          <div className="flex justify-end">
+              <Button onClick={handleAddPropertyClick} className="rounded-lg bg-gradient-to-r from-violet-400 to-violet-600 text-base text-white font-bold">List Your Property</Button>
+            </div>
         </div>
       </div>
 
