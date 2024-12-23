@@ -111,9 +111,9 @@ const Listing = () => {
   return (
     <main className="grid grid-cols-12 gap-2 w-full p-[30px]">
       {/* Header Section */}
-      <div className="h-[110px] col-span-12 w-full bg-gradient-to-r from-lime-100 to-indigo-100 rounded-lg p-[20px]">
+      <div className="h-[110px] col-span-12 w-full bg-gradient-to-r from-indigo-200 via-purple-50 to-blue-200 rounded-lg p-[20px]">
         <div className="flex justify-center">
-          <h1 className="text-slate-800 font-extrabold text-3xl">
+          <h1 className="text-slate-800 font-extrabold text-3xl drop-shadow-xl">
             Search your dreams
           </h1>
         </div>

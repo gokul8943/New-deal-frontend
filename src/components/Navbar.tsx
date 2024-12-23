@@ -6,8 +6,8 @@ const Navbar = () => {
             <div className='container mx-auto flex justify-between items-center'>
                 <Link to='/'>
                     <h1 className='font-bold text-lg sm:text-xl flex items-center'>
-                        <span className='text-slate-600'>FIND</span>
-                        <span className='text-slate-900'>dEAL</span>
+                        <span className='text-slate-600 drop-shadow-xl'>FIND</span>
+                        <span className='text-slate-900 drop-shadow-xl'>dEAL</span>
                     </h1>
                 </Link>
                 <ul className='hidden sm:flex gap-6'>
