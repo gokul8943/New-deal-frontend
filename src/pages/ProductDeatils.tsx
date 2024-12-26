@@ -123,14 +123,14 @@ const ProductDetails = () => {
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">You Might Also Like</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {/* Example: Map similar listings */}
-                        {/* {data.similarListings?.map((listing: any) => (
+                        {data.similarListings?.map((listing: any) => (
                             <div 
                                 key={listing.id} 
                                 className="transform transition duration-300 hover:scale-105"
                             >
                                 <ListingCard listing={listing} />
                             </div>
-                        ))} */}
+                        ))}
                     </div>
                 </div>
             </div>
