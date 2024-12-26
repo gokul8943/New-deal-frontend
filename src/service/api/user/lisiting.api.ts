@@ -15,7 +15,6 @@ export const createListing = async (data:any): Promise<any> => {
     return axios.post('/user/creatingListing', data);
 };
 
-export const getOneListing = (lid:any) =>{
-
-  return axios.get('/user/getOnelisting/:lid',lid)
+export const getOneListing = (lid:any) =>{  
+  return axios.get(`/user/getOnelisting/${lid}`)
 }

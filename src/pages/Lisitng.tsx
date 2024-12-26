@@ -13,6 +13,7 @@ interface Image {
 }
 
 interface Listing {
+  _id: string;
   id: string;
   createdAt: string;
   title: string;
@@ -44,7 +45,7 @@ const Listing = () => {
     getListing(page, search)
       .then((res) => {
         let sortedData = res.data.response.data;
-
+     
         // Apply sorting
         switch (sortBy) {
           case "newest":
@@ -192,7 +193,7 @@ const Listing = () => {
           <div
             key={listing.id}
             className="col-span-3 md:col-span-3 lg:col-span-3 sm:col-span-4 m-2 shadow-md hover:shadow-2xl cursor-pointer"
-            onClick={() => handleListingClick(listing.id)}
+            onClick={() => handleListingClick(listing._id)}
           >
             <ListingCard listing={listing} />
           </div>
