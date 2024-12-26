@@ -1,34 +1,44 @@
-import { useEffect, useState } from "react"
-import { getOneListing } from "../service/api/user/lisiting.api"
-import ListingCard from "../components/ListingCard"
-import { MapPin, Expand, Bath, Bed, ArrowRight } from "lucide-react"
+import { useEffect, useState } from "react";
+import { getOneListing } from "../service/api/user/lisiting.api";
+import ListingCard from "../components/ListingCard";
+import { MapPin, Expand, Bath, Bed, ArrowRight } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
-    const { lid } = useParams<{ lid: string }>()
+    const { lid } = useParams<{ lid: string }>();
     const [data, setData] = useState<any | null>(null);
-    const [mainImage, setMainImage] = useState<string>("")
+    const [mainImage, setMainImage] = useState<string>("");
 
     useEffect(() => {
+        if (!lid) return;
         getOneListing(lid)
             .then((res) => {
-                console.log('data', res.data);
-                setData(res.data.data)
-                if (res.data.data.image?.[0]?.url) {
-                    setMainImage(res.data.data.image[0].url); // Set the first image as the main image
+                console.log("data", res.data.data);
+                const listing = res.data.data;
+                setData(listing);
+                if (listing?.image?.[0]?.url) {
+                    setMainImage(listing.image[0].url); 
                 }
-            }).catch((error) => {
-                console.log(error);
             })
-    }, [lid])
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [lid]);
 
+    if (!data) {
+        return (
+            <main className="bg-gray-50 min-h-screen p-6 md:p-10 flex items-center justify-center">
+                <p className="text-gray-600 text-lg">Loading...</p>
+            </main>
+        );
+    }
 
     const propertyDetails = [
-        { icon: <MapPin className="text-blue-500 w-5 h-5" />, label: "City", value: "Kannur" },
-        { icon: <Expand className="text-green-500 w-5 h-5" />, label: "Total Area", value: "1500 sqft" },
-        { icon: <Bed className="text-purple-500 w-5 h-5" />, label: "Rooms", value: "3 Rooms" },
-        { icon: <Bath className="text-teal-500 w-5 h-5" />, label: "Bathrooms", value: "3" }
-    ]
+        { icon: <MapPin className="text-blue-500 w-5 h-5" />, label: "City", value: data.city || "Unknown" },
+        { icon: <Expand className="text-green-500 w-5 h-5" />, label: "Total Area", value: data.totalArea || "N/A" },
+        { icon: <Bed className="text-purple-500 w-5 h-5" />, label: "Rooms", value: `${data.rooms || 0} Rooms` },
+        { icon: <Bath className="text-teal-500 w-5 h-5" />, label: "Bathrooms", value: data.bathrooms || "N/A" },
+    ];
 
     return (
         <main className="bg-gray-50 min-h-screen p-6 md:p-10">
@@ -37,17 +47,17 @@ const ProductDetails = () => {
                 <div className="flex flex-col md:flex-row gap-6 mb-8">
                     <div className="md:w-2/3 bg-white rounded-xl shadow-lg overflow-hidden">
                         <div className="p-6 bg-gray-100">
-                            <h1 className="text-3xl font-bold text-gray-800">{data.title}</h1>
+                            <h1 className="text-3xl font-bold text-gray-800">{data.title || "Property Title"}</h1>
                             <div className="flex items-center text-gray-600 mt-2">
                                 <MapPin className="w-5 h-5 mr-2" />
-                                <span>{data.Location}</span>
+                                <span>{data.location || "Unknown Location"}</span>
                             </div>
                         </div>
 
                         {/* Main Image with Thumbnails */}
                         <div className="relative">
                             <img
-                                src={mainImage}
+                                src={mainImage || "/placeholder.jpg"}
                                 alt="Property Main View"
                                 className="w-full h-[450px] object-cover"
                             />
@@ -55,7 +65,7 @@ const ProductDetails = () => {
                                 {data.image?.map((img: any, index: number) => (
                                     <img
                                         key={index}
-                                        src={img}
+                                        src={img.url}
                                         alt={`Thumbnail ${index + 1}`}
                                         className="w-16 h-16 object-cover rounded-md cursor-pointer opacity-70 hover:opacity-100"
                                         onClick={() => setMainImage(img.url)}
@@ -92,7 +102,7 @@ const ProductDetails = () => {
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="md:col-span-2 bg-white rounded-xl shadow-lg p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4">Description</h2>
-                        <p className="text-gray-600 leading-relaxed">{data.description} </p>
+                        <p className="text-gray-600 leading-relaxed">{data.description || "No description available."}</p>
                     </div>
                     <div className="bg-white rounded-xl shadow-lg p-6">
                         <h2 className="text-2xl font-bold text-gray-800 mb-4">Location</h2>
@@ -102,7 +112,7 @@ const ProductDetails = () => {
                         <div className="mt-4">
                             <div className="flex items-center text-gray-600">
                                 <MapPin className="w-5 h-5 mr-2" />
-                                <span>Kottiyoor, Kannur</span>
+                                <span>{data.address || "No address available"}</span>
                             </div>
                         </div>
                     </div>
@@ -112,7 +122,8 @@ const ProductDetails = () => {
                 <div className="bg-white rounded-xl shadow-lg p-6">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">You Might Also Like</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* {data.map((listing) => (
+                        {/* Example: Map similar listings */}
+                        {/* {data.similarListings?.map((listing: any) => (
                             <div 
                                 key={listing.id} 
                                 className="transform transition duration-300 hover:scale-105"
@@ -124,7 +135,7 @@ const ProductDetails = () => {
                 </div>
             </div>
         </main>
-    )
-}
+    );
+};
 
-export default ProductDetails
+export default ProductDetails;
