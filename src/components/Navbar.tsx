@@ -28,7 +28,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link to='/blog' className='text-slate-800 hover:text-white font-bold drop-shadow-xl'>
-                            Blog
+                            {/* Blog */}
                         </Link>
                     </li>
                 </ul>
