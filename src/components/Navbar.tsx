@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+    const [user, setUser] = useState(null)
     return (
         <div className='bg-gradient-to-r from-indigo-200 to-violet-300  shadow-md w-full fixed z-20 py-5 px-4'>
             <div className='container mx-auto flex justify-between items-center'>
@@ -33,14 +35,19 @@ const Navbar = () => {
                     </li>
                 </ul>
                 <ul>
-                    
+
                 </ul>
                 <ul className='ml-6'>
-                    <li>
-                        <Link to='/user/login'>
-                           <button className='px-2 py-1 rounded-xl bg-white text-slate-800 font-semibold'>Login</button>
-                        </Link>
-                    </li>
+                    {user ?
+                     <li>
+                            
+                     </li>:
+                        <li>
+                            <Link to='/user/login'>
+                                <button className='px-2 py-1 rounded-xl bg-white text-slate-800 font-semibold'>Login</button>
+                            </Link>
+                        </li>
+                        }
                 </ul>
             </div>
         </div>
