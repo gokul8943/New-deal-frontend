@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOneListing } from "../service/api/user/lisiting.api";
 import ListingCard from "../components/ListingCard";
-import { MapPin, Expand, Bath, Bed, ArrowRight } from "lucide-react";
+import { MapPin, Expand, ArrowRight, Star, Home, Calendar, DollarSign } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = () => {
@@ -13,7 +13,7 @@ const ProductDetails = () => {
         if (!lid) return;
         getOneListing(lid)
             .then((res) => {
-                console.log("data", res.data.data);
+                console.log("data", res.data.data.image);
                 const listing = res.data.data;
                 setData(listing);
                 if (listing?.image?.[0]?.url) {
@@ -34,10 +34,10 @@ const ProductDetails = () => {
     }
 
     const propertyDetails = [
-        { icon: <MapPin className="text-blue-500 w-5 h-5" />, label: "City", value: data.city || "Unknown" },
-        { icon: <Expand className="text-green-500 w-5 h-5" />, label: "Total Area", value: data.totalArea || "N/A" },
-        { icon: <Bed className="text-purple-500 w-5 h-5" />, label: "Rooms", value: `${data.rooms || 0} Rooms` },
-        { icon: <Bath className="text-teal-500 w-5 h-5" />, label: "Bathrooms", value: data.bathrooms || "N/A" },
+        { icon: <Home className="text-blue-500 w-5 h-5" />, label: "Type", value: data.type || "N/A" },
+        { icon: <DollarSign className="text-green-500 w-5 h-5" />, label: "Price", value: `$${data.price?.toLocaleString() || "N/A"}` },
+        { icon: <Expand className="text-purple-500 w-5 h-5" />, label: "Status", value: data.status || "N/A" },
+        { icon: <Calendar className="text-teal-500 w-5 h-5" />, label: "Listed On", value: new Date(data.createdAt).toLocaleDateString() || "N/A" },
     ];
 
     return (
@@ -65,10 +65,10 @@ const ProductDetails = () => {
                                 {data.image?.map((img: any, index: number) => (
                                     <img
                                         key={index}
-                                        src={img.url}
+                                        src={img.thumbUrl}
                                         alt={`Thumbnail ${index + 1}`}
                                         className="w-16 h-16 object-cover rounded-md cursor-pointer opacity-70 hover:opacity-100"
-                                        onClick={() => setMainImage(img.url)}
+                                        onClick={() => setMainImage(img.thumbUrl)}
                                     />
                                 ))}
                             </div>
@@ -118,11 +118,25 @@ const ProductDetails = () => {
                     </div>
                 </div>
 
+                {/* Availability Section */}
+                {data.availability && data.availability.length > 0 && (
+                    <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6">Availability</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {data.availability.map((availability: string, index: number) => (
+                                <div key={index} className="flex items-center space-x-3">
+                                    <Star className="w-5 h-5 text-yellow-500" />
+                                    <span className="text-gray-700">{availability}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
                 {/* Similar Listings */}
                 <div className="bg-white rounded-xl shadow-lg p-6">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">You Might Also Like</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {/* Example: Map similar listings */}
                         {data.similarListings?.map((listing: any) => (
                             <div 
                                 key={listing.id} 
