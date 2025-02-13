@@ -4,6 +4,7 @@ import { getListing } from "../service/api/user/lisiting.api"
 import { Button, Input, message } from "antd";
 import homeimage from '../assets/images/newhome1.jpg'
 import { useNavigate } from "react-router-dom";
+import RentalCard from "../components/RentalCard";
 
 interface Image {
   uid: string;
@@ -15,7 +16,7 @@ interface Image {
 
 interface Listing {
   id: string;
-  createdAt:string;
+  createdAt: string;
   title: string;
   price: number;
   type: string;
@@ -77,7 +78,7 @@ const Home = () => {
               <span className="animate-pulse h-3 w-3 bg-green-500 rounded-full"></span>
               <span className="text-sm font-medium text-gray-600">Live Properties Available</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
               Find Your Dream{' '}
               <span className="relative">
@@ -87,16 +88,16 @@ const Home = () => {
                 </svg>
               </span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-slate-700 max-w-xl leading-relaxed">
-              Discover the perfect property that matches your lifestyle. From luxury homes 
+              Discover the perfect property that matches your lifestyle. From luxury homes
               to affordable apartments, we've got everything you need.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button 
-                size="large" 
-                type="primary" 
+              <Button
+                size="large"
+                type="primary"
                 className="bg-indigo-600 hover:bg-indigo-700 h-12 px-8 flex items-center gap-2 text-base"
                 onClick={handleExploreClick}
               >
@@ -105,8 +106,8 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Button>
-              <Button 
-                size="large" 
+              <Button
+                size="large"
                 className="border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 h-12 px-8 flex items-center gap-2 text-base"
                 onClick={handleAddPropertyClick}
               >
@@ -137,12 +138,12 @@ const Home = () => {
           {/* Right Image */}
           <div className="hidden md:flex items-center justify-center p-8 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-indigo-500/10 rounded-full blur-3xl"></div>
-            <img 
-              src={homeimage} 
-              alt="Modern House" 
-              className="max-w-md w-full object-cover rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative z-10" 
+            <img
+              src={homeimage}
+              alt="Modern House"
+              className="max-w-md w-full object-cover rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative z-10"
             />
-            
+
             {/* Floating Card */}
             <div className="absolute bottom-12 -left-8 bg-white rounded-xl shadow-lg p-4 transform hover:-translate-y-1 transition-all duration-300">
               <div className="flex items-center gap-3">
@@ -168,7 +169,7 @@ const Home = () => {
             Choose your path and let us guide you through every step of the process
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Buy Card */}
           <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
@@ -195,7 +196,7 @@ const Home = () => {
                   Get expert buying guidance
                 </li>
               </ul>
-              <Button 
+              <Button
                 className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white border-none h-12"
                 onClick={handleExploreClick}
               >
@@ -229,7 +230,7 @@ const Home = () => {
                   Dedicated selling agent
                 </li>
               </ul>
-              <Button 
+              <Button
                 className="w-full mt-6 bg-blue-500 hover:bg-blue-600 text-white border-none h-12"
                 onClick={handleAddPropertyClick}
               >
@@ -239,38 +240,7 @@ const Home = () => {
           </div>
 
           {/* Rent Card */}
-          <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
-            <div className="h-48 bg-gradient-to-br from-green-400 to-green-600 p-6 relative">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg">
-                <span className="text-3xl">🔑</span>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Rent Property</h3>
-              <p className="text-white/90">Find your perfect rental</p>
-              <div className="absolute -bottom-6 right-6 w-20 h-20 bg-green-200 rounded-full opacity-20 group-hover:scale-150 transition-transform duration-500"></div>
-            </div>
-            <div className="p-6">
-              <ul className="space-y-3 text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  Flexible lease terms
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  Verified properties
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span>
-                  Easy application process
-                </li>
-              </ul>
-              <Button 
-                className="w-full mt-6 bg-green-500 hover:bg-green-600 text-white border-none h-12"
-                onClick={handleExploreClick}
-              >
-                Find Rentals
-              </Button>
-            </div>
-          </div>
+          <RentalCard onClick={handleExploreClick} />
         </div>
       </div>
 
