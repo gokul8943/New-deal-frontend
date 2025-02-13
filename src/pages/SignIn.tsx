@@ -22,7 +22,6 @@ const SignIn = () => {
                     console.log('response',response);
                     if (response.status === 200 || response.status === 201) {
                         const { accessToken, refreshToken, user } = response.data;
-                        console.log('data',response.data);
                         
                         useAuthStore.getState().login(accessToken, user, refreshToken);
                         message.success("Login successfully"),
