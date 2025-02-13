@@ -1,1 +1,1 @@
-export const BASE_URL: string = import.meta.env.VITE_APP
+export const BASE_URL: any = import.meta.env.VITE_APP

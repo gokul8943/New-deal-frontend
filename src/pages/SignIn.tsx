@@ -3,6 +3,7 @@ import logins from '../assets/images/login.png'
 import { login } from '../service/api/user/user.api'
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import useAuthStore from '../store/authStore'
 const SignIn = () => {
 
     const [formData, setFormData] = useState({ email: "", password: "" })
@@ -15,22 +16,26 @@ const SignIn = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-   
         try {
             login(formData)
-           .then((response)=>{
-            if(response.status === 200 || response.status === 201){
-                message.success("Login successfully"),
-                  navigate("/");
-            }
-           }).catch((error)=>{
-                console.log(error)
-                message.error(error.response.data.message)
-           })
+                .then((response) => {
+                    console.log('response',response);
+                    if (response.status === 200 || response.status === 201) {
+                        const { accessToken, refreshToken, user } = response.data;
+                        console.log('data',response.data);
+                        
+                        useAuthStore.getState().login(accessToken, user, refreshToken);
+                        message.success("Login successfully"),
+                            navigate("/");
+                    }
+                }).catch((error) => {
+                    console.log(error)
+                    message.error(error.response.data.message)
+                })
         } catch (error) {
             console.log(error);
             console.log("Internal server error");
-            
+
         }
     }
 
