@@ -2,9 +2,14 @@ import { Button, Tabs, TabsProps } from "antd"
 import { useState } from "react"
 import ProfileEditModal from "../components/Modals/ProfileEditModal";
 import { UserOutlined, HeartOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
+import useAuthStore from "../store/authStore";
 
 const ProfiePage = () => {
+    const { authState } = useAuthStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -60,23 +65,23 @@ const ProfiePage = () => {
                                     <UserOutlined className="text-4xl text-gray-400" />
                                 </div>
                             </div>
-                            <h2 className="text-white text-xl font-bold text-center">Gokul M R</h2>
+                            <h2 className="text-white text-xl font-bold text-center">{authState.user.name}</h2>
                             <p className="text-indigo-100 text-center">Premium Member</p>
                         </div>
                         
                         <div className="p-6">
                             <div className="mb-4">
                                 <label className="text-sm text-gray-600 font-medium">Email</label>
-                                <p className="text-gray-800">test@gmail.com</p>
+                                <p className="text-gray-800">{authState.user.email}</p>
                             </div>
                             <div className="mb-4">
                                 <label className="text-sm text-gray-600 font-medium">Phone</label>
-                                <p className="text-gray-800">9207332015</p>
+                                <p className="text-gray-800">{authState.user.phone}</p>
                             </div>
-                            <div className="mb-4">
+                            {/* <div className="mb-4">
                                 <label className="text-sm text-gray-600 font-medium">Location</label>
                                 <p className="text-gray-800">Bangalore, India</p>
-                            </div>
+                            </div> */}
                             <Button 
                                 type="primary" 
                                 onClick={showModal} 
