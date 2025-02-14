@@ -19,10 +19,10 @@ const ProfessionalCard = () => {
           { value: "95%", label: "Happy Customers" }
         ].map((item, index) => (
           <div key={index} className="flex justify-center">
-            <div className="relative w-32 h-32 flex items-center justify-center transform rotate-45  shadow-md">
+            <div className="relative w-32 h-32 flex items-center justify-center transform rotate-45  shadow-md shadow-gray-400 hover:shadow-lg hover:shadow-slate-700 hover:bg-violet-500 ">
               <div className="absolute transform -rotate-45 text-center">
-                <div className="text-3xl font-bold text-slate-800">{item.value}</div>
-                <p className="text-sm text-slate-600 mt-1">{item.label}</p>
+                <div className="text-3xl font-bold text-slate-800 hover:text-white">{item.value}</div>
+                <p className="text-sm text-slate-600 hover:text-white mt-1">{item.label}</p>
               </div>
             </div>
           </div>
