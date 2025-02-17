@@ -25,7 +25,16 @@ const ListingAddPage: FC = () => {
 
     const onFinish = async (values: FormValues) => {
         try {
-            const result = await createListing({ ...values, image: fileList });
+            const user = localStorage.getItem("user");
+            if (!user) {
+                message.error("User not found. Please log in.");
+                return;
+            }
+    
+            const parsedUser = JSON.parse(user); // Parse JSON
+            const userId = parsedUser._id;
+            
+            const result = await createListing({ ...values,userId, image: fileList });
             message.success("Property added successfully!");
             console.log("API Response:", result);
         } catch (error) {
