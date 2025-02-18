@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card, Switch, Select, Button, Tabs, Alert, Space, Typography, Layout } from 'antd';
 import { Bell, Moon, Globe, Shield, LogOut, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
 
 const { Title, Text } = Typography;
 const { Content } = Layout;
@@ -12,13 +13,15 @@ const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false);
   const navigate  = useNavigate();
+  const {logout} = useAuthStore()
 
   const handleLogout = () => {
     try {
       // Remove auth token from localStorage
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
+      // localStorage.removeItem('accessToken');
+      // localStorage.removeItem('refreshToken');
+      // localStorage.removeItem('user');
+      logout(),
       
       // Remove any other stored data
       sessionStorage.clear();

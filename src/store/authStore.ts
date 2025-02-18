@@ -51,15 +51,15 @@ const useAuthStore = create<AuthStore>((set) => ({
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
-    set({
-      authState: {
-        ...initialAuthState,
-        isAuthenticated: false,
-        accessToken: null,
-        refreshToken: null,
-        user: null,
-      },
-    });
+    // set({
+    //   authState: {
+    //     ...initialAuthState,
+    //     isAuthenticated: false,
+    //     accessToken: null,
+    //     refreshToken: null,
+    //     user: null,
+    //   },
+    // });
   },
   updateAccessToken: (accessToken: string) => {
     localStorage.setItem('accessToken', accessToken);
