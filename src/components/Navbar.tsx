@@ -5,10 +5,16 @@ import { UserOutlined } from '@ant-design/icons';
 const Navbar = () => {
     const { authState } = useAuthStore();
     const navigate = useNavigate();
+    const user = authState.user
 
 
     const handleMove = () => {
-        navigate('/profile')
+        if(!user){
+            navigate('/user/login')
+        }else{
+            navigate('/profile')
+        }
+       
     }
     return (
         <div className='bg-gradient-to-r from-indigo-200 to-violet-300  shadow-md w-full fixed z-20 py-5 px-4'>

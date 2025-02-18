@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Switch, Select, Button, Tabs, Alert, Space, Typography, Layout } from 'antd';
+import { Card, Switch, Select, Button, Tabs, Alert, Space, Typography, Layout, message } from 'antd';
 import { Bell, Moon, Globe, Shield, LogOut, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
@@ -13,43 +13,18 @@ const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false);
   const navigate  = useNavigate();
-  const {logout} = useAuthStore()
+  const { authState } = useAuthStore()
 
+
+  const user = authState.user
+  console.log(user);
+  
   const handleLogout = () => {
-    try {
-      // Remove auth token from localStorage
-      // localStorage.removeItem('accessToken');
-      // localStorage.removeItem('refreshToken');
-      // localStorage.removeItem('user');
-      logout(),
-      
-      // Remove any other stored data
-      sessionStorage.clear();
-      
-      // Clear any cookies if they exist
-      document.cookie.split(";").forEach((cookie) => {
-        document.cookie = cookie
-          .replace(/^ +/, "")
-          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
-      });
-      
-      setShowLogoutAlert(true);
-      
-      // Redirect after a short delay
-      setTimeout(() => {
-        // Navigate to login page
-        navigate('/user/login');
-      }, 1500);
-      
-    } catch (error) {
-      console.error('Logout error:', error);
-      Alert({
-        message: 'Logout Failed',
-        description: 'There was an error logging out. Please try again.',
-        type: 'error',
-      });
-    }
-  };;
+    useAuthStore.getState().logout();
+    navigate("/user/login");
+    message.success("Logged out successfully");
+  };
+
 
   return (
     <Content className="p-6 max-w-4xl mx-auto">
