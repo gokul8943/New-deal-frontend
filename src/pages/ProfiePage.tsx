@@ -1,7 +1,7 @@
 import { Button, Tabs, TabsProps } from "antd"
 import { useState } from "react"
 import ProfileEditModal from "../components/Modals/ProfileEditModal";
-import { UserOutlined, HeartOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
 import useAuthStore from "../store/authStore";
 import MyListing from "../components/MyListing";
 import Settings from "../components/Settings";
@@ -34,16 +34,6 @@ const ProfiePage = () => {
         },
         {
             key: '2',
-            label: (
-                <span>
-                    <HeartOutlined />
-                    Favorites
-                </span>
-            ),
-            children: 'Content of Favorites',
-        },
-        {
-            key: '3',
             label: (
                 <span>
                     <SettingOutlined />
