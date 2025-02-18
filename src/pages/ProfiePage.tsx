@@ -3,13 +3,14 @@ import { useState } from "react"
 import ProfileEditModal from "../components/Modals/ProfileEditModal";
 import { UserOutlined, HeartOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
 import useAuthStore from "../store/authStore";
+import MyListing from "../components/MyListing";
+import Settings from "../components/Settings";
+
 
 const ProfiePage = () => {
     const { authState } = useAuthStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-
-
+  
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -29,7 +30,7 @@ const ProfiePage = () => {
                     My Listings
                 </span>
             ),
-            children: 'Content of My Listings',
+            children: <MyListing />,
         },
         {
             key: '2',
@@ -49,7 +50,7 @@ const ProfiePage = () => {
                     Settings
                 </span>
             ),
-            children: 'Account Settings',
+            children:<Settings />,
         },
     ];
 

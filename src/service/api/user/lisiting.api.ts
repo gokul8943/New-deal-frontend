@@ -18,3 +18,6 @@ export const createListing = async (data:any): Promise<any> => {
 export const getOneListing = (lid:any) =>{  
   return axios.get(`/user/getOnelisting/${lid}`)
 }
+export const getUserAddedListing = (userId:any) =>{  
+  return axios.get(`/user/userAddedlisting`,userId)
+}
