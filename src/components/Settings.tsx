@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Card, Switch, Select, Button, Tabs, Alert, Space, Typography, Layout } from 'antd';
 import { Bell, Moon, Globe, Shield, LogOut, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const { Title, Text } = Typography;
 const { Content } = Layout;
@@ -10,11 +11,42 @@ const Settings = () => {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [showLogoutAlert, setShowLogoutAlert] = useState(false);
+  const navigate  = useNavigate();
 
   const handleLogout = () => {
-    setShowLogoutAlert(true);
-    // Add your logout logic here
-  };
+    try {
+      // Remove auth token from localStorage
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      
+      // Remove any other stored data
+      sessionStorage.clear();
+      
+      // Clear any cookies if they exist
+      document.cookie.split(";").forEach((cookie) => {
+        document.cookie = cookie
+          .replace(/^ +/, "")
+          .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+      });
+      
+      setShowLogoutAlert(true);
+      
+      // Redirect after a short delay
+      setTimeout(() => {
+        // Navigate to login page
+        navigate('/user/login');
+      }, 1500);
+      
+    } catch (error) {
+      console.error('Logout error:', error);
+      Alert({
+        message: 'Logout Failed',
+        description: 'There was an error logging out. Please try again.',
+        type: 'error',
+      });
+    }
+  };;
 
   return (
     <Content className="p-6 max-w-4xl mx-auto">

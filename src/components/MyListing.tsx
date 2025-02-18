@@ -26,7 +26,7 @@ const MyListing = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {listings.length > 0 ? (
-                listings.map((listing) => <ListingCard key={listing._id} listing={listing} />)
+                listings.map((listing) => <ListingCard key={undefined} listing={listing} />)
             ) : (
                 <p className="text-center text-gray-500">No Listings Found</p>
             )}
