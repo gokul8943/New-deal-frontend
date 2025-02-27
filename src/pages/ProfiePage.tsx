@@ -3,7 +3,7 @@ import { useState } from "react"
 import ProfileEditModal from "../components/Modals/ProfileEditModal";
 import { UserOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
 import useAuthStore from "../store/authStore";
-import MyListing from "../components/MyListing";
+import MyListing from "../components/UserListing";
 import Settings from "../components/Settings";
 
 

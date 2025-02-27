@@ -7,7 +7,7 @@ import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import ProductDeatils from "./pages/ProductDeatils"
 import ProfiePage from "./pages/ProfiePage"
-import ListingAddPage from "./pages/ListingAddPage"
+import ListingAddPage from "./pages/PropertyAddingPage"
 
 function App() {
   return (
