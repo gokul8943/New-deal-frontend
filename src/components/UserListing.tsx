@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import ListingCard from "./ListingCard";
-import useAuthStore from "../store/authStore";
 import { getUserAddedListing } from "../service/api/user/lisiting.api";
+import { useParams } from "react-router-dom";
 
 const MyListing = () => {
-    const { authState } = useAuthStore();
+
     const [listings, setListings] = useState([]);
+    const { userId } = useParams()
 
     useEffect(() => {
         const fetchUserListing = async () => {
             try {
-                const userId = authState.user._id;
                 const response = await getUserAddedListing(userId); 
                 console.log(response.data);
                 
@@ -21,7 +21,7 @@ const MyListing = () => {
         };
 
         fetchUserListing();
-    }, [authState.user._id]);
+    }, [userId]);
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
