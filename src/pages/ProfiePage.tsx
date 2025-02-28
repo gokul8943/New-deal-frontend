@@ -30,7 +30,7 @@ const ProfiePage = () => {
                     My Listings
                 </span>
             ),
-            children: <MyListing />,
+            children: <MyListing userId={authState.user._id}/>,
         },
         {
             key: '2',

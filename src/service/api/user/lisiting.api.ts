@@ -19,5 +19,5 @@ export const getOneListing = (lid:any) =>{
   return axios.get(`/user/getOnelisting/${lid}`)
 }
 export const getUserAddedListing = (userId:any) =>{  
-  return axios.get(`/user/userAddedlisting/:userId`,userId)
+  return axios.get(`/user/userAddedlisting`,userId)
 }
