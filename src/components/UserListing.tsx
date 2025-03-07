@@ -22,11 +22,11 @@ interface Listing {
 }
 
 interface MyListingProps {
-    userId: string; 
+    userId: string;
 }
 
 const MyListing = ({ userId }: MyListingProps) => {
-    
+
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -38,14 +38,12 @@ const MyListing = ({ userId }: MyListingProps) => {
                 setLoading(false);
                 return;
             }
-
             try {
                 setLoading(true);
-                const response = await getUserAddedListing(userId); // ✅ API request with userId in params
-                console.log("User listings response:", response.data);
+                const response = await getUserAddedListing(userId);
 
-                if (response && response.data) {
-                    setListings(response.data);
+                if (response && response.data.userData) {
+                    setListings(response.data.userData);
                 } else {
                     setListings([]);
                 }
@@ -69,14 +67,19 @@ const MyListing = ({ userId }: MyListingProps) => {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {listings.length > 0 ? (
-                listings.map((listing) => (
-                    <ListingCard key={listing._id} listing={listing} />
-                ))
-            ) : (
-                <p className="col-span-3 text-center text-gray-500 py-8">No listings found</p>
-            )}
+        <div className="">
+            <div className="px-3 py-2">
+                <h2 className="text-3xl font-bold mb-4  bg-gradient-to-br from-violet-600 via-emerald-800 to-pink-700 text-transparent bg-clip-text drop-shadow-xl">My Listings</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-3 py-4">
+                {listings.length > 0 ? (
+                    listings.map((listing) => (
+                        <ListingCard key={listing._id} listing={listing} />
+                    ))
+                ) : (
+                    <p className="col-span-3 text-center text-gray-500 py-8">No listings found</p>
+                )}
+            </div>
         </div>
     );
 };
