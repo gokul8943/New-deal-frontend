@@ -1,48 +1,54 @@
-import { Button, Tabs, TabsProps } from "antd"
-import { useState } from "react"
+import { Button, Tabs, TabsProps } from "antd";
+import { useState, useEffect } from "react";
 import ProfileEditModal from "../components/Modals/ProfileEditModal";
-import { UserOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, FileTextOutlined, SettingOutlined } from "@ant-design/icons";
 import useAuthStore from "../store/authStore";
 import MyListing from "../components/UserListing";
 import Settings from "../components/Settings";
+import { useParams } from "react-router-dom";
 
-
-const ProfiePage = () => {
+const ProfilePage = () => {
     const { authState } = useAuthStore();
     const [isModalOpen, setIsModalOpen] = useState(false);
-  
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+    const [items, setItems] = useState<TabsProps["items"]>([]);
+    const { userId } = useParams<{ userId: string }>();
 
-    const items: TabsProps['items'] = [
-        {
-            key: '1',
-            label: (
-                <span>
-                    <FileTextOutlined />
-                    My Listings
-                </span>
-            ),
-            children: <MyListing userId={authState.user._id}/>,
-        },
-        {
-            key: '2',
-            label: (
-                <span>
-                    <SettingOutlined />
-                    Settings
-                </span>
-            ),
-            children:<Settings />,
-        },
-    ];
+    console.log("Profile Page - userId:", userId);
+
+    useEffect(() => {
+        if (userId) {
+            setItems([
+                {
+                    key: "1",
+                    label: (
+                        <span>
+                            <FileTextOutlined />
+                            My Listings
+                        </span>
+                    ),
+                    children: <MyListing userId={userId}/>,
+                },
+                {
+                    key: "2",
+                    label: (
+                        <span>
+                            <SettingOutlined />
+                            Settings
+                        </span>
+                    ),
+                    children: <Settings />,
+                },
+            ]);
+        }
+    }, [userId]);
+
+    const showModal = () => setIsModalOpen(true);
+    const handleOk = () => setIsModalOpen(false);
+    const handleCancel = () => setIsModalOpen(false);
+
+    if (!authState.user) {
+        return <div className="text-center py-8">Loading user profile...</div>;
+    }
 
     return (
         <main className="max-w-7xl mx-auto px-4 py-8">
@@ -56,26 +62,24 @@ const ProfiePage = () => {
                                     <UserOutlined className="text-4xl text-gray-400" />
                                 </div>
                             </div>
-                            <h2 className="text-white text-xl font-bold text-center">{authState.user.name}</h2>
+                            <h2 className="text-white text-xl font-bold text-center">
+                                {authState.user?.name}
+                            </h2>
                             <p className="text-indigo-100 text-center">Premium Member</p>
                         </div>
-                        
+
                         <div className="p-6">
                             <div className="mb-4">
                                 <label className="text-sm text-gray-600 font-medium">Email</label>
-                                <p className="text-gray-800">{authState.user.email}</p>
+                                <p className="text-gray-800">{authState.user?.email}</p>
                             </div>
                             <div className="mb-4">
                                 <label className="text-sm text-gray-600 font-medium">Phone</label>
-                                <p className="text-gray-800">{authState.user.phone}</p>
+                                <p className="text-gray-800">{authState.user?.phone}</p>
                             </div>
-                            {/* <div className="mb-4">
-                                <label className="text-sm text-gray-600 font-medium">Location</label>
-                                <p className="text-gray-800">Bangalore, India</p>
-                            </div> */}
-                            <Button 
-                                type="primary" 
-                                onClick={showModal} 
+                            <Button
+                                type="primary"
+                                onClick={showModal}
                                 className="w-full bg-indigo-600 hover:bg-indigo-700"
                             >
                                 Edit Profile
@@ -98,7 +102,7 @@ const ProfiePage = () => {
                 handleOk={handleOk}
             />
         </main>
-    )
-}
+    );
+};
 
-export default ProfiePage
+export default ProfilePage;

@@ -6,13 +6,15 @@ const Navbar = () => {
     const { authState } = useAuthStore();
     const navigate = useNavigate();
     const user = authState.user
-
+    const userId = user?._id
+    console.log('user',user);
+    
 
     const handleMove = () => {
         if(!user){
             navigate('/user/login')
         }else{
-            navigate('/profile')
+            navigate(`/profile/${userId}`)
         }
        
     }

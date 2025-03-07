@@ -21,7 +21,7 @@ function App() {
           <Route path='detailpage/:lid' element={<ProductDeatils />} />
           <Route path='/user/login' element={<SignIn />} />
           <Route path='/user/register' element={<SignUp />} />
-          <Route path='/profile' element={<ProfiePage />} />
+          <Route path='/profile/:userId' element={<ProfiePage />} />
           <Route path='/AddProduct' element={<ListingAddPage />} />
         </Routes>
       </div>
