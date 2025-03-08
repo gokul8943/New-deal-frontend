@@ -1,6 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
 import useAuthStore from '../store/authStore';
-import { UserOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
     const { authState } = useAuthStore();
@@ -56,7 +55,7 @@ const Navbar = () => {
                     {user ?
                         <li onClick={handleMove} className='flex justify-between items-center hover:cursor-pointer'>
                             <div className="h-8 w-8 rounded-full bg-white border-1 border-slate-700 shadow-lg flex justify-center items-center ">
-                                <UserOutlined size={30} className="flex items-center" />
+                              <img src={user.profilePicture} alt="profile-img" className='rounded-full p-1' />
                             </div>
                             <p  className='px-2 py-1 text-slate-800 font-semibold'>{user.name}</p>
                         </li> :
