@@ -6,16 +6,16 @@ const Navbar = () => {
     const navigate = useNavigate();
     const user = authState.user
     const userId = user?._id
-    console.log('user',user);
-    
+    console.log('user', user);
+
 
     const handleMove = () => {
-        if(!user){
+        if (!user) {
             navigate('/user/login')
-        }else{
+        } else {
             navigate(`/profile/${userId}`)
         }
-       
+
     }
     return (
         <div className='bg-gradient-to-r from-indigo-200 to-violet-300  shadow-md w-full fixed z-20 py-5 px-4'>
@@ -55,9 +55,9 @@ const Navbar = () => {
                     {user ?
                         <li onClick={handleMove} className='flex justify-between items-center hover:cursor-pointer'>
                             <div className="h-8 w-8 rounded-full bg-white border-1 border-slate-700 shadow-lg flex justify-center items-center ">
-                              <img src={user.profilePicture} alt="profile-img" className='rounded-full p-1' />
+                                <img src={user.profilePicture} alt="profile-img" className='rounded-full p-1' />
                             </div>
-                            <p  className='px-2 py-1 text-slate-800 font-semibold'>{user.name}</p>
+                            <p className='px-2 py-1 text-slate-800 font-semibold'>{user.name}</p>
                         </li> :
                         <li>
                             <Link to='/user/login'>
